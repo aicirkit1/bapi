@@ -1,0 +1,32 @@
+id,name,description,area,transactions
+Z_CREDIT_VIEW,Credit View,Read-only access to credit data,Credit,FD33;VKM4
+Z_CREDIT_APPROVE,Credit Approval,Approve credit limits,Credit,VKM1;VKM3;FD32
+Z_CREDIT_LIMIT_ADMIN,Credit Limit Admin,Maintain credit master,Credit,FD32;UKM_BP
+Z_PAY_VIEW,Payment View,Display payment documents,Payments,FB03;FBL1N
+Z_PAY_CREATE,Payment Creation,Create and post payments,Payments,F-53;F110;FB60
+Z_PAY_APPROVE,Payment Approval,Approve and release payments,Payments,FBV0;FB02;F110S
+Z_VENDOR_MAINTAIN,Vendor Master,Maintain vendor master data,Payments,FK01;FK02
+Z_RISK_ANALYST,Risk Analyst,Risk reporting and analysis,Risk,FTR0;RM01
+Z_RISK_MODEL,Risk Model Admin,Maintain risk models,Risk,RM02;KLNACHT
+Z_TREASURY_DEAL,Treasury Dealing,Create treasury deals,Treasury,TBB1;FTR_CREATE
+Z_TREASURY_SETTLE,Treasury Settlement,Settle treasury deals,Treasury,TBB4;FTR_SETTLE
+Z_TREASURY_VIEW,Treasury View,Display treasury positions,Treasury,TPM10;FTR_VIEW
+Z_HR_ADMIN,HR Administration,Manage employee master data,HR,PA30;PA40
+Z_HR_PAYROLL,Payroll Processing,Run payroll,HR,PC00;PU01
+Z_ACCOUNTING_POST,GL Posting,Post GL documents,Accounting,FB50;F-02
+Z_ACCOUNTING_CLOSE,Period Close,Execute period-end closing,Accounting,F.16;FAGLGVTR
+Z_ACCOUNTING_VIEW,GL View,Display GL accounts,Accounting,FAGLL03;FS10N
+Z_IT_USER_ADMIN,IT User Admin,Create and lock SAP users,IT,SU01;SU10
+Z_IT_ROLE_ADMIN,IT Role Admin,Maintain authorization roles,IT,PFCG;SUIM
+Z_IT_BASIS,IT Basis Admin,SAP Basis administration,IT,SM59;RZ10
+Z_SAP_ALL,SAP_ALL Superuser,Unrestricted access via the SAP_ALL profile,IT,SAP_ALL;SU01;SE38
+Z_BASIS_ADMIN,Basis Administration,Critical system administration,IT,SE16;SM59;SCC4;PFCG
+Z_COMP_AUDIT,Compliance Audit,Audit and compliance reporting,Compliance,GRAC;NWBC
+Z_COMP_MONITOR,Compliance Monitor,Continuous control monitoring,Compliance,GRFN;MSMP
+Z_PROC_PO_CREATE,PO Creation,Create purchase orders,Procurement,ME21N;ME51N
+Z_PROC_PO_APPROVE,PO Approval,Approve/release purchase orders,Procurement,ME29N;ME28
+Z_PROC_VIEW,Procurement View,Display purchase documents,Procurement,ME23N;ME2M
+Z_OPS_RECONCILE,Operations Reconcile,Reconcile sub-ledgers,Operations,FF67;FEBA
+Z_OPS_VIEW,Operations View,Display operational data,Operations,FBL3N;FAGLB03
+Z_SALES_ORDER,Sales Order,Create sales orders,Sales,VA01;VA02
+Z_SALES_VIEW,Sales View,Display sales documents,Sales,VA03;VA05

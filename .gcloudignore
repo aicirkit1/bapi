@@ -1,0 +1,11 @@
+# Files NOT uploaded to Cloud Build (keeps the build context small & fast).
+.git
+.gitignore
+**/node_modules
+**/dist
+**/.angular
+backend/public
+**/coverage
+**/.env
+**/*.log
+**/.DS_Store

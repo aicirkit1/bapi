@@ -1,0 +1,12 @@
+**/node_modules
+**/dist
+**/.angular
+backend/public
+**/coverage
+**/.env
+**/*.log
+.git
+.gitignore
+**/.DS_Store
+docs
+*.md

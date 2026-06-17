@@ -1,0 +1,227 @@
+userId,roleId,assignedAt,lastUsedAt,reason
+U1001,Z_CREDIT_LIMIT_ADMIN,2013-08-13,2024-03-26,Standard Credit role.
+U1001,Z_CREDIT_APPROVE,2017-06-12,2024-05-09,Standard Credit role.
+U1001,Z_CREDIT_VIEW,2015-04-14,2025-04-20,Standard Credit role.
+U1002,Z_VENDOR_MAINTAIN,2020-07-05,2024-04-14,Standard Payments role.
+U1003,Z_RISK_MODEL,2015-10-23,2020-01-25,Standard Risk role.
+U1004,Z_TREASURY_SETTLE,2015-09-04,2020-06-14,Standard Treasury role.
+U1004,Z_TREASURY_DEAL,2022-06-20,2025-02-15,Standard Treasury role.
+U1004,Z_TREASURY_VIEW,2018-04-23,2018-04-04,Standard Treasury role.
+U1005,Z_HR_PAYROLL,2012-06-13,2025-11-12,Standard HR role.
+U1006,Z_ACCOUNTING_POST,2018-04-27,2019-05-22,Standard Accounting role.
+U1006,Z_ACCOUNTING_VIEW,2014-10-08,2024-07-02,Standard Accounting role.
+U1006,Z_ACCOUNTING_CLOSE,2020-12-20,2025-09-24,Standard Accounting role.
+U1007,Z_SAP_ALL,2016-02-13,2025-10-27,Standard IT role.
+U1007,Z_IT_BASIS,2012-10-22,2025-07-22,Standard IT role.
+U1007,Z_BASIS_ADMIN,2013-03-06,2025-03-07,Standard IT role.
+U1008,Z_COMP_AUDIT,2014-11-13,2025-09-11,Standard Compliance role.
+U1008,Z_COMP_MONITOR,2022-11-03,2017-04-18,Standard Compliance role.
+U1009,Z_PROC_VIEW,2013-11-23,2024-06-20,Standard Procurement role.
+U1009,Z_PROC_PO_APPROVE,2013-07-11,2025-12-18,Standard Procurement role.
+U1009,Z_PROC_PO_CREATE,2013-06-05,2020-03-15,Standard Procurement role.
+U1010,Z_OPS_VIEW,2017-02-05,2024-08-22,Standard Operations role.
+U1010,Z_RISK_MODEL,2021-03-28,2019-08-01,Leftover from a previous role in Risk before transfer to Operations.
+U1011,Z_SALES_VIEW,2012-03-05,2019-11-23,Standard Sales role.
+U1011,Z_SALES_ORDER,2015-12-04,2017-03-15,Standard Sales role.
+U1012,Z_CREDIT_APPROVE,2012-04-14,2024-09-12,Standard Credit role.
+U1013,Z_PAY_CREATE,2019-01-07,2017-04-25,Standard Payments role.
+U1014,Z_RISK_MODEL,2019-10-13,2025-04-18,Standard Risk role.
+U1014,Z_RISK_ANALYST,2021-11-10,2020-05-28,Standard Risk role.
+U1015,Z_TREASURY_DEAL,2022-09-27,2024-01-18,Standard Treasury role.
+U1015,Z_TREASURY_SETTLE,2015-11-04,2024-04-03,Standard Treasury role.
+U1015,Z_IT_ROLE_ADMIN,2019-07-03,2018-02-23,Leftover from a previous role in IT before transfer to Treasury.
+U1016,Z_HR_PAYROLL,2020-10-22,2024-04-20,Standard HR role.
+U1017,Z_ACCOUNTING_POST,2020-10-25,2024-12-19,Standard Accounting role.
+U1017,Z_ACCOUNTING_VIEW,2012-09-24,2024-05-09,Standard Accounting role.
+U1017,Z_ACCOUNTING_CLOSE,2022-05-18,2025-10-07,Standard Accounting role.
+U1018,Z_BASIS_ADMIN,2015-04-25,2019-10-13,Standard IT role.
+U1018,Z_TREASURY_SETTLE,2018-05-24,2017-10-28,Leftover from a previous role in Treasury before transfer to IT.
+U1019,Z_COMP_MONITOR,2017-03-28,2024-10-23,Standard Compliance role.
+U1019,Z_COMP_AUDIT,2021-05-01,2024-10-28,Standard Compliance role.
+U1020,Z_PROC_PO_CREATE,2022-01-11,2025-03-16,Standard Procurement role.
+U1020,Z_PROC_PO_APPROVE,2015-11-28,2024-05-14,Standard Procurement role.
+U1020,Z_PROC_VIEW,2015-04-03,2025-08-25,Standard Procurement role.
+U1021,Z_OPS_RECONCILE,2020-12-06,2025-12-04,Standard Operations role.
+U1021,Z_OPS_VIEW,2015-11-28,2024-06-04,Standard Operations role.
+U1021,Z_ACCOUNTING_POST,2017-01-23,2018-09-11,Accumulated access.
+U1021,Z_TREASURY_SETTLE,2021-12-02,2025-09-13,Accumulated access.
+U1022,Z_SALES_ORDER,2013-11-03,2025-09-02,Standard Sales role.
+U1022,Z_SALES_VIEW,2017-06-19,2025-09-20,Standard Sales role.
+U1023,Z_CREDIT_APPROVE,2013-07-05,2024-03-25,Standard Credit role.
+U1023,Z_CREDIT_VIEW,2020-05-11,2024-09-07,Standard Credit role.
+U1023,Z_CREDIT_LIMIT_ADMIN,2012-06-28,2025-12-02,Standard Credit role.
+U1024,Z_PAY_CREATE,2018-03-22,2024-11-05,Standard Payments role.
+U1025,Z_RISK_MODEL,2021-06-08,2025-10-16,Standard Risk role.
+U1026,Z_TREASURY_VIEW,2021-02-18,2024-05-05,Standard Treasury role.
+U1026,Z_TREASURY_SETTLE,2018-07-03,2025-12-04,Standard Treasury role.
+U1027,Z_HR_PAYROLL,2019-09-08,2025-12-27,Standard HR role.
+U1027,Z_SAP_ALL,2019-12-15,2018-05-23,Leftover from a previous role in IT before transfer to HR.
+U1028,Z_ACCOUNTING_CLOSE,2017-08-02,2025-09-06,Standard Accounting role.
+U1029,Z_SAP_ALL,2021-03-21,2025-08-21,Standard IT role.
+U1029,Z_IT_BASIS,2022-05-03,2025-02-14,Standard IT role.
+U1029,Z_IT_USER_ADMIN,2017-11-07,2024-11-11,Standard IT role.
+U1030,Z_COMP_MONITOR,2016-04-27,2024-02-28,Standard Compliance role.
+U1031,Z_PROC_PO_CREATE,2022-04-03,2020-10-05,Standard Procurement role.
+U1031,Z_PROC_PO_APPROVE,2020-06-15,2025-05-19,Standard Procurement role.
+U1031,Z_PROC_VIEW,2014-03-05,2025-02-02,Standard Procurement role.
+U1031,Z_HR_PAYROLL,2017-03-18,2019-04-21,Leftover from a previous role in HR before transfer to Procurement.
+U1032,Z_OPS_VIEW,2018-03-06,2025-10-10,Standard Operations role.
+U1032,Z_OPS_RECONCILE,2013-07-13,2025-08-01,Standard Operations role.
+U1032,Z_HR_PAYROLL,2017-01-21,2020-10-06,Leftover from a previous role in HR before transfer to Operations.
+U1033,Z_SALES_VIEW,2017-05-28,2024-08-23,Standard Sales role.
+U1034,Z_CREDIT_VIEW,2012-12-04,2024-01-01,Standard Credit role.
+U1034,Z_CREDIT_APPROVE,2018-05-28,2024-07-26,Standard Credit role.
+U1034,Z_CREDIT_LIMIT_ADMIN,2016-09-18,2025-07-08,Standard Credit role.
+U1035,Z_VENDOR_MAINTAIN,2012-02-12,2025-08-02,Standard Payments role.
+U1035,Z_PAY_APPROVE,2022-02-15,2025-02-25,Standard Payments role.
+U1035,Z_PAY_CREATE,2015-08-16,2018-11-04,Standard Payments role.
+U1036,Z_RISK_MODEL,2021-01-19,2024-09-24,Standard Risk role.
+U1037,Z_TREASURY_SETTLE,2015-02-02,2025-06-07,Standard Treasury role.
+U1037,Z_TREASURY_DEAL,2017-09-25,2025-11-12,Standard Treasury role.
+U1037,Z_TREASURY_VIEW,2012-11-19,2019-02-24,Standard Treasury role.
+U1038,Z_HR_PAYROLL,2016-05-04,2024-07-07,Standard HR role.
+U1038,Z_HR_ADMIN,2021-03-23,2025-12-24,Standard HR role.
+U1039,Z_ACCOUNTING_POST,2022-03-18,2024-11-23,Standard Accounting role.
+U1039,Z_ACCOUNTING_CLOSE,2019-10-18,2025-01-24,Standard Accounting role.
+U1039,Z_HR_ADMIN,2020-03-12,2017-08-10,Accumulated access.
+U1039,Z_CREDIT_VIEW,2017-04-06,2025-06-24,Accumulated access.
+U1040,Z_IT_ROLE_ADMIN,2013-12-10,2025-01-19,Standard IT role.
+U1041,Z_COMP_AUDIT,2015-02-01,2025-12-04,Standard Compliance role.
+U1042,Z_PROC_PO_CREATE,2019-05-20,2018-06-06,Standard Procurement role.
+U1043,Z_OPS_VIEW,2021-12-20,2024-05-17,Standard Operations role.
+U1043,Z_OPS_RECONCILE,2017-08-04,2021-02-03,Standard Operations role.
+U1044,Z_SALES_VIEW,2012-06-12,2025-09-27,Standard Sales role.
+U1045,Z_CREDIT_VIEW,2013-04-14,2024-05-07,Standard Credit role.
+U1045,Z_CREDIT_APPROVE,2012-11-19,2019-03-21,Standard Credit role.
+U1045,Z_CREDIT_LIMIT_ADMIN,2021-08-25,2024-02-08,Standard Credit role.
+U1046,Z_VENDOR_MAINTAIN,2013-03-09,2025-07-27,Standard Payments role.
+U1046,Z_PROC_PO_CREATE,2017-04-06,2020-07-10,Leftover from a previous role in Procurement before transfer to Payments.
+U1047,Z_RISK_ANALYST,2013-04-09,2025-01-09,Standard Risk role.
+U1047,Z_RISK_MODEL,2022-10-28,2025-03-12,Standard Risk role.
+U1048,Z_TREASURY_DEAL,2012-06-07,2024-10-27,Standard Treasury role.
+U1048,Z_TREASURY_VIEW,2020-11-25,2025-05-21,Standard Treasury role.
+U1049,Z_HR_PAYROLL,2018-10-27,2024-09-25,Standard HR role.
+U1050,Z_ACCOUNTING_VIEW,2018-04-15,2024-04-26,Standard Accounting role.
+U1050,Z_ACCOUNTING_CLOSE,2016-05-10,2017-03-22,Standard Accounting role.
+U1051,Z_SAP_ALL,2013-10-25,2025-11-18,Standard IT role.
+U1051,Z_IT_USER_ADMIN,2012-12-21,2025-08-11,Standard IT role.
+U1051,Z_RISK_ANALYST,2018-11-15,2021-06-16,Leftover from a previous role in Risk before transfer to IT.
+U1052,Z_COMP_AUDIT,2022-08-28,2025-07-03,Standard Compliance role.
+U1053,Z_PROC_PO_APPROVE,2016-01-21,2021-10-15,Standard Procurement role.
+U1053,Z_PROC_PO_CREATE,2018-03-16,2024-09-01,Standard Procurement role.
+U1054,Z_OPS_RECONCILE,2015-03-17,2025-01-07,Standard Operations role.
+U1055,Z_SALES_ORDER,2013-07-07,2017-05-19,Standard Sales role.
+U1055,Z_SALES_VIEW,2013-02-12,2025-08-26,Standard Sales role.
+U1055,Z_RISK_ANALYST,2019-01-13,2020-02-08,Leftover from a previous role in Risk before transfer to Sales.
+U1056,Z_CREDIT_VIEW,2012-03-22,2025-01-16,Standard Credit role.
+U1057,Z_PAY_VIEW,2013-08-27,2025-03-15,Standard Payments role.
+U1058,Z_RISK_MODEL,2014-06-08,2025-06-02,Standard Risk role.
+U1059,Z_TREASURY_DEAL,2017-11-12,2024-08-04,Standard Treasury role.
+U1059,Z_TREASURY_VIEW,2019-03-26,2024-01-17,Standard Treasury role.
+U1060,Z_HR_PAYROLL,2017-04-19,2024-10-10,Standard HR role.
+U1060,Z_HR_ADMIN,2019-10-24,2021-03-26,Standard HR role.
+U1060,Z_SAP_ALL,2018-07-08,2025-11-05,Accumulated access.
+U1060,Z_PROC_PO_APPROVE,2021-04-01,2021-06-06,Accumulated access.
+U1060,Z_ACCOUNTING_POST,2018-10-28,2024-04-07,Accumulated access.
+U1061,Z_ACCOUNTING_VIEW,2015-02-01,2019-10-26,Standard Accounting role.
+U1061,Z_ACCOUNTING_POST,2014-12-04,2024-12-09,Standard Accounting role.
+U1062,Z_IT_USER_ADMIN,2016-09-21,2020-04-28,Standard IT role.
+U1062,Z_IT_ROLE_ADMIN,2019-03-01,2024-01-26,Standard IT role.
+U1062,Z_BASIS_ADMIN,2013-12-15,2024-11-15,Standard IT role.
+U1062,Z_HR_ADMIN,2019-10-27,2017-02-18,Leftover from a previous role in HR before transfer to IT.
+U1063,Z_COMP_MONITOR,2014-09-02,2025-11-26,Standard Compliance role.
+U1064,Z_PROC_VIEW,2015-12-08,2024-03-12,Standard Procurement role.
+U1064,Z_PROC_PO_APPROVE,2013-09-12,2025-01-22,Standard Procurement role.
+U1064,Z_PROC_PO_CREATE,2018-05-01,2025-05-17,Standard Procurement role.
+U1065,Z_OPS_VIEW,2020-12-27,2024-04-05,Standard Operations role.
+U1065,Z_RISK_ANALYST,2020-11-21,2018-05-08,Leftover from a previous role in Risk before transfer to Operations.
+U1066,Z_SALES_VIEW,2015-06-14,2025-05-22,Standard Sales role.
+U1066,Z_SALES_ORDER,2018-07-28,2024-02-27,Standard Sales role.
+U1067,Z_CREDIT_APPROVE,2015-03-28,2025-02-05,Standard Credit role.
+U1068,Z_PAY_CREATE,2018-04-05,2024-09-11,Standard Payments role.
+U1068,Z_PAY_APPROVE,2021-08-02,2024-06-12,Standard Payments role.
+U1069,Z_RISK_MODEL,2015-11-22,2024-09-04,Standard Risk role.
+U1070,Z_TREASURY_VIEW,2020-02-25,2025-06-14,Standard Treasury role.
+U1071,Z_HR_ADMIN,2014-04-15,2020-06-03,Standard HR role.
+U1072,Z_ACCOUNTING_VIEW,2014-04-12,2025-03-16,Standard Accounting role.
+U1072,Z_ACCOUNTING_CLOSE,2014-10-20,2020-09-13,Standard Accounting role.
+U1073,Z_IT_USER_ADMIN,2013-12-14,2025-07-07,Standard IT role.
+U1073,Z_IT_ROLE_ADMIN,2021-06-28,2025-05-14,Standard IT role.
+U1073,Z_BASIS_ADMIN,2020-05-23,2025-09-21,Standard IT role.
+U1073,Z_PAY_VIEW,2018-09-09,2017-06-23,Leftover from a previous role in Payments before transfer to IT.
+U1074,Z_COMP_AUDIT,2014-07-10,2025-01-08,Standard Compliance role.
+U1074,Z_COMP_MONITOR,2017-12-14,2025-06-10,Standard Compliance role.
+U1075,Z_PROC_PO_CREATE,2012-12-04,2024-09-13,Standard Procurement role.
+U1076,Z_OPS_VIEW,2019-03-11,2018-07-02,Standard Operations role.
+U1076,Z_SAP_ALL,2018-03-07,2018-11-09,Leftover from a previous role in IT before transfer to Operations.
+U1077,Z_SALES_ORDER,2019-08-15,2025-08-20,Standard Sales role.
+U1078,Z_CREDIT_VIEW,2012-07-03,2017-12-21,Standard Credit role.
+U1079,Z_VENDOR_MAINTAIN,2019-02-11,2020-11-26,Standard Payments role.
+U1080,Z_RISK_MODEL,2020-07-28,2024-03-17,Standard Risk role.
+U1080,Z_RISK_ANALYST,2018-06-19,2024-09-12,Standard Risk role.
+U1080,Z_SALES_VIEW,2021-11-09,2017-05-05,Leftover from a previous role in Sales before transfer to Risk.
+U1081,Z_TREASURY_VIEW,2013-08-16,2025-01-17,Standard Treasury role.
+U1081,Z_TREASURY_SETTLE,2020-12-02,2025-02-28,Standard Treasury role.
+U1081,Z_TREASURY_DEAL,2013-11-17,2025-01-16,Standard Treasury role.
+U1082,Z_HR_ADMIN,2018-11-11,2021-02-28,Standard HR role.
+U1082,Z_HR_PAYROLL,2014-10-08,2025-02-25,Standard HR role.
+U1083,Z_ACCOUNTING_POST,2019-10-24,2024-10-05,Standard Accounting role.
+U1083,Z_ACCOUNTING_CLOSE,2018-06-23,2024-08-23,Standard Accounting role.
+U1083,Z_ACCOUNTING_VIEW,2021-07-08,2024-07-06,Standard Accounting role.
+U1084,Z_IT_USER_ADMIN,2018-08-15,2024-02-12,Standard IT role.
+U1084,Z_IT_ROLE_ADMIN,2018-04-06,2017-02-05,Standard IT role.
+U1084,Z_TREASURY_DEAL,2020-07-14,2019-08-19,Leftover from a previous role in Treasury before transfer to IT.
+U1085,Z_COMP_MONITOR,2021-08-10,2025-04-27,Standard Compliance role.
+U1085,Z_PAY_VIEW,2017-06-28,2018-10-10,Leftover from a previous role in Payments before transfer to Compliance.
+U1086,Z_PROC_VIEW,2014-11-09,2024-04-09,Standard Procurement role.
+U1087,Z_OPS_RECONCILE,2019-03-16,2025-12-13,Standard Operations role.
+U1087,Z_OPS_VIEW,2015-06-01,2024-03-12,Standard Operations role.
+U1088,Z_SALES_VIEW,2014-08-10,2025-10-20,Standard Sales role.
+U1089,Z_CREDIT_VIEW,2015-03-05,2024-06-07,Standard Credit role.
+U1089,Z_CREDIT_APPROVE,2016-08-05,2025-03-06,Standard Credit role.
+U1089,Z_TREASURY_VIEW,2018-05-09,2021-04-12,Leftover from a previous role in Treasury before transfer to Credit.
+U1089,Z_PROC_VIEW,2020-02-21,2017-03-10,Accumulated access.
+U1089,Z_PAY_CREATE,2020-10-23,2024-08-28,Accumulated access.
+U1090,Z_PAY_VIEW,2020-11-20,2020-02-01,Standard Payments role.
+U1081,Z_PAY_CREATE,2019-10-03,2024-02-21,Operational role.
+U1081,Z_PAY_APPROVE,2019-10-20,2024-11-04,Granted during a reorganisation.
+U1083,Z_PAY_CREATE,2016-04-19,2025-06-22,Operational role.
+U1083,Z_PAY_APPROVE,2019-06-05,2025-09-19,Granted during a reorganisation.
+U1089,Z_PAY_APPROVE,2022-10-10,2024-04-12,Granted during a reorganisation.
+U1078,Z_TREASURY_DEAL,2017-09-15,2024-10-12,Operational role.
+U1078,Z_TREASURY_SETTLE,2019-01-22,2024-04-20,Granted during a reorganisation.
+U1003,Z_TREASURY_DEAL,2014-12-14,2025-01-24,Operational role.
+U1003,Z_TREASURY_SETTLE,2021-07-14,2025-10-21,Granted during a reorganisation.
+U1087,Z_TREASURY_DEAL,2016-11-05,2024-12-13,Operational role.
+U1087,Z_TREASURY_SETTLE,2020-05-10,2024-10-06,Granted during a reorganisation.
+U1020,Z_VENDOR_MAINTAIN,2014-05-25,2025-09-17,Operational role.
+U1020,Z_PAY_CREATE,2019-01-17,2025-03-24,Granted during a reorganisation.
+U1019,Z_VENDOR_MAINTAIN,2015-05-28,2024-11-28,Operational role.
+U1019,Z_PAY_CREATE,2018-07-23,2024-01-16,Granted during a reorganisation.
+U1038,Z_ACCOUNTING_POST,2020-10-17,2025-07-23,Operational role.
+U1038,Z_ACCOUNTING_CLOSE,2019-07-04,2024-11-18,Granted during a reorganisation.
+U1048,Z_ACCOUNTING_POST,2019-09-23,2025-10-08,Operational role.
+U1048,Z_ACCOUNTING_CLOSE,2022-10-28,2024-08-06,Granted during a reorganisation.
+U1084,Z_ACCOUNTING_POST,2018-01-11,2024-08-18,Operational role.
+U1084,Z_ACCOUNTING_CLOSE,2018-10-15,2025-04-25,Granted during a reorganisation.
+U1029,Z_IT_ROLE_ADMIN,2022-06-15,2025-01-07,Granted during a reorganisation.
+U1076,Z_IT_USER_ADMIN,2018-01-16,2025-02-19,Operational role.
+U1076,Z_IT_ROLE_ADMIN,2022-04-08,2024-04-05,Granted during a reorganisation.
+U1065,Z_PROC_PO_CREATE,2017-08-09,2024-06-14,Operational role.
+U1065,Z_PROC_PO_APPROVE,2021-10-12,2024-11-22,Granted during a reorganisation.
+U1068,Z_PROC_PO_CREATE,2017-11-11,2025-03-17,Operational role.
+U1068,Z_PROC_PO_APPROVE,2021-04-03,2025-04-22,Granted during a reorganisation.
+U1052,Z_PROC_PO_CREATE,2017-05-27,2024-03-22,Operational role.
+U1052,Z_PROC_PO_APPROVE,2022-05-08,2024-12-22,Granted during a reorganisation.
+U1063,Z_HR_ADMIN,2016-12-12,2024-06-03,Operational role.
+U1063,Z_HR_PAYROLL,2020-08-03,2025-11-24,Granted during a reorganisation.
+U1059,Z_HR_ADMIN,2015-01-02,2025-01-04,Operational role.
+U1059,Z_HR_PAYROLL,2018-10-07,2025-07-22,Granted during a reorganisation.
+U1020,Z_SAP_ALL,2012-10-25,2024-11-07,Emergency firefighter access — never removed.
+U1028,Z_SAP_ALL,2018-02-12,2024-02-04,Emergency firefighter access — never removed.
+U1049,Z_SAP_ALL,2017-03-20,2024-03-14,Emergency firefighter access — never removed.
+U1072,Z_SAP_ALL,2019-06-04,2024-12-27,Emergency firefighter access — never removed.
+U1084,Z_SAP_ALL,2017-05-11,2024-02-05,Emergency firefighter access — never removed.
+U1013,Z_BASIS_ADMIN,2020-06-17,2024-02-22,System administration access.
+U1041,Z_BASIS_ADMIN,2019-07-04,2024-07-04,System administration access.
+U1063,Z_BASIS_ADMIN,2018-02-28,2025-09-14,System administration access.
