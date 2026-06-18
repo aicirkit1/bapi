@@ -9,51 +9,51 @@ import { SapConnection } from '../../core/models';
   imports: [FormsModule],
   template: `
     <div class="page-head">
-      <h1>SAP Connection Center</h1>
-      <p>Connect a real SAP system, or spin up a demo sandbox — no SAP required.</p>
+      <h1>SAP-Verbindungszentrum</h1>
+      <p>Verbinden Sie ein echtes SAP-System oder starten Sie eine Demo-Sandbox — ohne SAP erforderlich.</p>
     </div>
 
     <div class="choices">
       <div class="card choice demo">
         <div class="choice-icon">⚡</div>
-        <h2>Use Demo SAP Sandbox</h2>
+        <h2>Demo-SAP-Sandbox verwenden</h2>
         <p class="muted">
-          Instantly create a pre-loaded sandbox connection and explore the full
-          product flow with realistic mock SAP data.
+          Erstellen Sie sofort eine vorbefüllte Sandbox-Verbindung und erkunden Sie den
+          gesamten Produktablauf mit realistischen SAP-Beispieldaten.
         </p>
         <button class="btn btn-primary" [disabled]="busy()" (click)="useDemo()">
-          {{ busy() ? 'Connecting…' : 'Use Demo SAP Sandbox →' }}
+          {{ busy() ? 'Verbindung wird hergestellt…' : 'Demo-SAP-Sandbox verwenden →' }}
         </button>
       </div>
 
       <div class="card choice">
         <div class="choice-icon">🔌</div>
-        <h2>Add Real SAP Connection</h2>
+        <h2>Echte SAP-Verbindung hinzufügen</h2>
         <p class="muted">
-          Enter your SAP system details. Test the connection, then save it.
+          Geben Sie Ihre SAP-Systemdaten ein. Testen Sie die Verbindung und speichern Sie sie anschließend.
         </p>
         <button class="btn" (click)="showForm.set(!showForm())">
-          {{ showForm() ? 'Hide form' : 'Configure connection' }}
+          {{ showForm() ? 'Formular ausblenden' : 'Verbindung konfigurieren' }}
         </button>
       </div>
     </div>
 
     @if (showForm()) {
       <div class="card form-card">
-        <h2>New connection</h2>
+        <h2>Neue Verbindung</h2>
         <div class="grid">
-          <label>Connection Name<input class="input" [(ngModel)]="form.name" placeholder="SAP Production" /></label>
-          <label>SAP Host<input class="input" [(ngModel)]="form.host" placeholder="sap-prod.bank.local" /></label>
-          <label>SAP Client<input class="input" [(ngModel)]="form.client" placeholder="100" /></label>
-          <label>System Number<input class="input" [(ngModel)]="form.systemNumber" placeholder="00" /></label>
-          <label>Username<input class="input" [(ngModel)]="form.username" placeholder="RFC_USER" /></label>
-          <label>Password<input class="input" type="password" [(ngModel)]="form.password" placeholder="••••••" /></label>
-          <label>Language<input class="input" [(ngModel)]="form.language" placeholder="EN" /></label>
+          <label>Verbindungsname<input class="input" [(ngModel)]="form.name" placeholder="SAP Production" /></label>
+          <label>SAP-Host<input class="input" [(ngModel)]="form.host" placeholder="sap-prod.bank.local" /></label>
+          <label>SAP-Mandant<input class="input" [(ngModel)]="form.client" placeholder="100" /></label>
+          <label>Systemnummer<input class="input" [(ngModel)]="form.systemNumber" placeholder="00" /></label>
+          <label>Benutzername<input class="input" [(ngModel)]="form.username" placeholder="RFC_USER" /></label>
+          <label>Passwort<input class="input" type="password" [(ngModel)]="form.password" placeholder="••••••" /></label>
+          <label>Sprache<input class="input" [(ngModel)]="form.language" placeholder="EN" /></label>
         </div>
         <div class="actions">
-          <button class="btn" [disabled]="busy()" (click)="save()">Save Connection</button>
+          <button class="btn" [disabled]="busy()" (click)="save()">Verbindung speichern</button>
           <span class="muted hint">
-            Test Connection will report <strong>FAILED</strong> until a live SAP / node-rfc is wired up.
+            Verbindungstest meldet <strong>FAILED</strong>, bis ein Live-SAP / node-rfc angebunden ist.
           </span>
         </div>
       </div>
@@ -61,10 +61,10 @@ import { SapConnection } from '../../core/models';
 
     @if (connections().length) {
       <div class="card">
-        <h2>Connections</h2>
+        <h2>Verbindungen</h2>
         <table>
           <thead>
-            <tr><th>Name</th><th>Host</th><th>Client</th><th>Status</th><th></th></tr>
+            <tr><th>Name</th><th>Host</th><th>Mandant</th><th>Status</th><th></th></tr>
           </thead>
           <tbody>
             @for (c of connections(); track c.id) {
@@ -74,8 +74,8 @@ import { SapConnection } from '../../core/models';
                 <td class="mono">{{ c.client || '—' }}</td>
                 <td><span class="badge b-{{ c.status }}">{{ c.status }}</span></td>
                 <td class="row-actions">
-                  <button class="btn small" (click)="test(c)">Test</button>
-                  <button class="btn small btn-primary" (click)="proceed(c)">Use →</button>
+                  <button class="btn small" (click)="test(c)">Testen</button>
+                  <button class="btn small btn-primary" (click)="proceed(c)">Verwenden →</button>
                 </td>
               </tr>
             }

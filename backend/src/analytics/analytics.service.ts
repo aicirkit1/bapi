@@ -81,15 +81,15 @@ export class AnalyticsService {
       (sum, f) => sum + (f.severity === 'HIGH' ? 40 : f.severity === 'MEDIUM' ? 22 : 12),
       0,
     );
-    addFactor(`${sod.length} Segregation-of-Duties conflict(s)`, sodPoints);
-    addFactor(`${dormant.length} dormant role(s)`, dormant.length * 7);
-    addFactor(`${crossDept.length} cross-department role(s)`, crossDept.length * 6);
+    addFactor(`${sod.length} Funktionstrennungskonflikt(e)`, sodPoints);
+    addFactor(`${dormant.length} ruhende Rolle(n)`, dormant.length * 7);
+    addFactor(`${crossDept.length} abteilungsübergreifende Rolle(n)`, crossDept.length * 6);
 
     const over = Math.max(0, roles.length - OVER_PRIVILEGED_ROLES);
-    addFactor(`over-provisioned by ${over} role(s)`, over * 5);
+    addFactor(`um ${over} Rolle(n) überprivilegiert`, over * 5);
 
     if (user.status === 'INACTIVE' && roles.length > 0) {
-      addFactor('inactive user still holding access', 15);
+      addFactor('inaktiver Benutzer mit weiterhin bestehendem Zugriff', 15);
     }
 
     const raw = factors.reduce((s, f) => s + f.points, 0);
@@ -214,7 +214,7 @@ export class AnalyticsService {
 
     return {
       generatedAt: new Date().toISOString(),
-      title: 'SAP Access & Role Governance — Audit Report',
+      title: 'SAP-Zugriffs- und Rollen-Governance — Prüfbericht',
       summary: {
         ...overview.totals,
         sodFindings: findings.length,

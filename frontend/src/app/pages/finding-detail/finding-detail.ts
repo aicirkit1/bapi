@@ -4,16 +4,37 @@ import { ApiService } from '../../core/api.service';
 import { Finding, FindingStatus } from '../../core/models';
 import { AiInsightComponent } from '../../shared/ai-insight';
 
+const RISK_TYPE_LABELS: Record<string, string> = {
+  SAP_ALL_ASSIGNED: 'SAP_ALL zugewiesen',
+  CRITICAL_TRANSACTION_ACCESS: 'Kritischer Transaktionszugriff',
+  SOD_CONFLICT: 'Funktionstrennungskonflikt',
+  INACTIVE_USER_WITH_ROLE: 'Inaktiver Benutzer mit Rolle',
+  EXCESSIVE_PRIVILEGE: 'Übermäßige Berechtigungen',
+  UNUSED_ROLE: 'Ungenutzte Rolle',
+};
+
+const SEVERITY_LABELS: Record<string, string> = {
+  HIGH: 'Hoch',
+  MEDIUM: 'Mittel',
+  LOW: 'Niedrig',
+};
+
+const STATUS_LABELS: Record<string, string> = {
+  OPEN: 'Offen',
+  ACCEPTED: 'Akzeptiertes Risiko',
+  REMEDIATION: 'In Behebung',
+};
+
 @Component({
   selector: 'app-finding-detail',
   imports: [RouterLink, AiInsightComponent],
   template: `
     @if (finding(); as f) {
       <div class="page-head">
-        <a routerLink="/findings" class="back">← Risk findings</a>
+        <a routerLink="/findings" class="back">← Risikobefunde</a>
         <div class="title-row">
           <h1>{{ label(f.riskType) }}</h1>
-          <span class="sev sev-{{ f.severity }} big">{{ f.severity }}</span>
+          <span class="sev sev-{{ f.severity }} big">{{ severityLabel(f.severity) }}</span>
         </div>
         <p>{{ f.description }}</p>
       </div>
@@ -21,9 +42,9 @@ import { AiInsightComponent } from '../../shared/ai-insight';
       <div class="cols">
         <div class="main">
           <div class="card">
-            <h2>AI recommendation</h2>
+            <h2>KI-Empfehlung</h2>
             <p class="reco">{{ f.recommendation }}</p>
-            <h3>Remediation steps</h3>
+            <h3>Behebungsschritte</h3>
             <ol class="steps">
               @for (step of f.remediation; track $index) {
                 <li>{{ step }}</li>
@@ -32,31 +53,31 @@ import { AiInsightComponent } from '../../shared/ai-insight';
           </div>
 
           <app-ai-insight
-            label="AI remediation plan"
-            hint="Generate a step-by-step remediation plan tailored to this finding."
+            label="KI-Behebungsplan"
+            hint="Erstellen Sie einen schrittweisen, auf diesen Befund zugeschnittenen Behebungsplan."
             [prompt]="planPrompt()"
           />
 
           <app-ai-insight
-            label="Draft manager email"
-            hint="Draft a short email to the user's manager explaining the risk and the requested action."
+            label="Manager-E-Mail entwerfen"
+            hint="Entwerfen Sie eine kurze E-Mail an den Vorgesetzten des Benutzers, die das Risiko und die angeforderte Maßnahme erläutert."
             [prompt]="emailPrompt()"
           />
 
           <div class="card">
-            <h2>Technical evidence</h2>
-            <div class="kv"><span>Risk type</span><b class="mono">{{ f.riskType }}</b></div>
+            <h2>Technischer Nachweis</h2>
+            <div class="kv"><span>Risikotyp</span><b class="mono">{{ f.riskType }}</b></div>
             @if (f.roleId) {
-              <div class="kv"><span>Role</span>
+              <div class="kv"><span>Rolle</span>
                 <a class="link" [routerLink]="['/roles', f.roleId]">{{ f.roleName || f.roleId }}</a>
               </div>
             }
             @if (f.transactions?.length) {
-              <div class="kv"><span>Transactions</span>
+              <div class="kv"><span>Transaktionen</span>
                 <span>@for (t of f.transactions; track t) { <span class="chip">{{ t }}</span> }</span>
               </div>
             }
-            <div class="kv"><span>Source SAP tables</span>
+            <div class="kv"><span>SAP-Quelltabellen</span>
               <span>@for (t of f.sourceTables; track t) { <span class="chip">{{ t }}</span> }</span>
             </div>
           </div>
@@ -64,7 +85,7 @@ import { AiInsightComponent } from '../../shared/ai-insight';
 
         <div class="side">
           <div class="card">
-            <h2>Affected user</h2>
+            <h2>Betroffener Benutzer</h2>
             <div class="user">
               <div class="avatar">{{ initials(f.userName) }}</div>
               <div>
@@ -77,13 +98,13 @@ import { AiInsightComponent } from '../../shared/ai-insight';
           <div class="card">
             <h2>Status</h2>
             <div class="status-now">
-              Current: <span class="status s-{{ f.status }}">{{ f.status }}</span>
+              Aktuell: <span class="status s-{{ f.status }}">{{ statusLabel(f.status) }}</span>
             </div>
             <div class="actions">
-              <button class="btn btn-primary" (click)="act('REMEDIATION')">Create Remediation Task</button>
-              <button class="btn" (click)="act('ACCEPTED')">Mark as Accepted Risk</button>
-              <button class="btn" (click)="act('OPEN')">Re-open</button>
-              <button class="btn" (click)="exportFinding(f)">⤓ Export Finding</button>
+              <button class="btn btn-primary" (click)="act('REMEDIATION')">Behebungsaufgabe erstellen</button>
+              <button class="btn" (click)="act('ACCEPTED')">Als akzeptiertes Risiko markieren</button>
+              <button class="btn" (click)="act('OPEN')">Wieder öffnen</button>
+              <button class="btn" (click)="exportFinding(f)">⤓ Befund exportieren</button>
             </div>
             @if (toast()) {
               <div class="toast">{{ toast() }}</div>
@@ -92,7 +113,7 @@ import { AiInsightComponent } from '../../shared/ai-insight';
         </div>
       </div>
     } @else {
-      <div class="empty">Loading finding…</div>
+      <div class="empty">Befund wird geladen…</div>
     }
   `,
   styles: [
@@ -249,10 +270,10 @@ export class FindingDetailComponent {
       this.finding.set(updated);
       this.toast.set(
         status === 'REMEDIATION'
-          ? 'Remediation task created.'
+          ? 'Behebungsaufgabe erstellt.'
           : status === 'ACCEPTED'
-            ? 'Marked as accepted risk.'
-            : 'Finding re-opened.',
+            ? 'Als akzeptiertes Risiko markiert.'
+            : 'Befund wieder geöffnet.',
       );
     });
   }
@@ -270,11 +291,15 @@ export class FindingDetailComponent {
   }
 
   label(t: string): string {
-    return t
-      .toLowerCase()
-      .split('_')
-      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-      .join(' ');
+    return RISK_TYPE_LABELS[t] ?? t;
+  }
+
+  severityLabel(s: string): string {
+    return SEVERITY_LABELS[s] ?? s;
+  }
+
+  statusLabel(s: string): string {
+    return STATUS_LABELS[s] ?? s;
   }
 
   initials(name: string): string {

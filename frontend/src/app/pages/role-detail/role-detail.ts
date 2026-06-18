@@ -10,23 +10,23 @@ import { AiInsightComponent } from '../../shared/ai-insight';
   template: `
     @if (role(); as r) {
       <div class="page-head">
-        <a routerLink="/roles" class="back">← Roles</a>
+        <a routerLink="/roles" class="back">← Rollen</a>
         <h1>{{ r.name }}</h1>
         <p><span class="mono">{{ r.id }}</span> · {{ r.area }} — {{ r.description }}</p>
       </div>
 
       <app-ai-insight
-        label="AI role analysis"
-        hint="Explain in business terms what this role allows and whether it looks over-powered."
+        label="KI-Rollenanalyse"
+        hint="Erklären Sie in geschäftlichen Begriffen, was diese Rolle erlaubt und ob sie überberechtigt erscheint."
         [prompt]="aiPrompt()"
       />
 
       <div class="cols">
         <div class="card">
-          <h2>Authorizations</h2>
+          <h2>Berechtigungen</h2>
           <table>
             <thead>
-              <tr><th>Auth object</th><th>Field</th><th>Value</th><th>T-Code</th></tr>
+              <tr><th>Berechtigungsobjekt</th><th>Feld</th><th>Wert</th><th>T-Code</th></tr>
             </thead>
             <tbody>
               @for (a of r.authorizations; track $index) {
@@ -42,9 +42,9 @@ import { AiInsightComponent } from '../../shared/ai-insight';
         </div>
 
         <div class="card">
-          <h2>Members ({{ r.members.length }})</h2>
+          <h2>Mitglieder ({{ r.members.length }})</h2>
           @if (r.members.length === 0) {
-            <p class="muted">No users hold this role.</p>
+            <p class="muted">Kein Benutzer besitzt diese Rolle.</p>
           } @else {
             <ul class="members">
               @for (m of r.members; track m.id) {
@@ -58,7 +58,7 @@ import { AiInsightComponent } from '../../shared/ai-insight';
         </div>
       </div>
     } @else {
-      <div class="empty">Loading…</div>
+      <div class="empty">Wird geladen…</div>
     }
   `,
   styles: [
@@ -104,9 +104,9 @@ export class RoleDetailComponent {
   protected readonly aiPrompt = computed(() => {
     const r = this.role();
     return r
-      ? `Explain in plain business terms what the SAP role ${r.id} ("${r.name}") actually allows, ` +
-          `based on its transactions and authorization objects. Is it sensitive or over-powered, ` +
-          `and what should reviewers watch for? Use the data tools.`
+      ? `Erklären Sie in einfachen geschäftlichen Begriffen, was die SAP-Rolle ${r.id} ("${r.name}") tatsächlich erlaubt, ` +
+          `basierend auf ihren Transaktionen und Berechtigungsobjekten. Ist sie sensibel oder überberechtigt, ` +
+          `und worauf sollten Prüfer achten? Verwenden Sie die Datenwerkzeuge.`
       : '';
   });
 

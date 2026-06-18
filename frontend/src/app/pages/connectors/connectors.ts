@@ -7,11 +7,11 @@ import { Connector, DataSource } from '../../core/models';
   selector: 'app-connectors',
   template: `
     <div class="page-head">
-      <h1>Connectors & Data Sources</h1>
-      <p>Choose the SAP data to import. Connectors handle the extraction.</p>
+      <h1>Konnektoren & Datenquellen</h1>
+      <p>Wählen Sie die zu importierenden SAP-Daten aus. Die Konnektoren übernehmen die Extraktion.</p>
     </div>
 
-    <h2 class="sec">Connectors</h2>
+    <h2 class="sec">Konnektoren</h2>
     <div class="connectors">
       @for (c of connectors(); track c.id) {
         <div class="card connector" [class.off]="!c.enabled">
@@ -22,13 +22,13 @@ import { Connector, DataSource } from '../../core/models';
           <p class="muted">{{ c.description }}</p>
           <label class="switch">
             <input type="checkbox" [checked]="c.enabled" (change)="toggleConnector(c)" />
-            <span>{{ c.enabled ? 'Enabled' : 'Disabled' }}</span>
+            <span>{{ c.enabled ? 'Aktiviert' : 'Deaktiviert' }}</span>
           </label>
         </div>
       }
     </div>
 
-    <h2 class="sec">Data sources to import</h2>
+    <h2 class="sec">Zu importierende Datenquellen</h2>
     <div class="card sources">
       @for (s of sources(); track s.id) {
         <label class="source" [class.checked]="selected().has(s.id)">
@@ -42,9 +42,9 @@ import { Connector, DataSource } from '../../core/models';
     </div>
 
     <div class="footer">
-      <span class="muted">{{ selected().size }} data source(s) selected</span>
+      <span class="muted">{{ selected().size }} Datenquelle(n) ausgewählt</span>
       <button class="btn btn-primary" [disabled]="selected().size === 0" (click)="startSync()">
-        Start Sync →
+        Synchronisation starten →
       </button>
     </div>
   `,

@@ -15,18 +15,18 @@ import {
   template: `
     @if (user(); as u) {
       <div class="page-head">
-        <a routerLink="/users" class="back">← Users</a>
+        <a routerLink="/users" class="back">← Benutzer</a>
         <h1>{{ u.name }}</h1>
         <p>
           <span class="mono">{{ u.id }}</span> · {{ u.department }} ·
-          joined {{ u.joinedAt }} ·
-          <span class="tag" [class.tag-primary]="u.status === 'ACTIVE'">{{ u.status }}</span>
+          beigetreten {{ u.joinedAt }} ·
+          <span class="tag" [class.tag-primary]="u.status === 'ACTIVE'">{{ u.status === 'ACTIVE' ? 'Aktiv' : 'Inaktiv' }}</span>
         </p>
       </div>
 
       @if (findings().length) {
         <div class="card risk-banner">
-          <strong>⚠ {{ findings().length }} Segregation-of-Duties risk(s)</strong>
+          <strong>⚠ {{ findings().length }} Funktionstrennungsrisiko(en)</strong>
           @for (f of findings(); track f.ruleId) {
             <div class="risk-row">
               <span class="sev sev-{{ f.severity }}">{{ f.severity }}</span>
@@ -38,16 +38,16 @@ import {
       }
 
       <app-ai-insight
-        label="AI risk summary"
-        hint="Ask the AI why this user is a risk and what to do about it."
+        label="KI-Risikozusammenfassung"
+        hint="Fragen Sie die KI, warum dieser Benutzer ein Risiko darstellt und was dagegen zu tun ist."
         [prompt]="aiPrompt()"
       />
 
       <div class="card">
-        <h2>Assigned roles</h2>
+        <h2>Zugewiesene Rollen</h2>
         <table>
           <thead>
-            <tr><th>Role</th><th>Area</th><th>Assigned</th><th>Last used</th><th></th></tr>
+            <tr><th>Rolle</th><th>Bereich</th><th>Zugewiesen</th><th>Zuletzt verwendet</th><th></th></tr>
           </thead>
           <tbody>
             @for (r of u.roles; track r.id) {
@@ -58,9 +58,9 @@ import {
                 </td>
                 <td>{{ r.area }}</td>
                 <td>{{ r.assignment.assignedAt }}</td>
-                <td>{{ r.assignment.lastUsedAt ?? 'never' }}</td>
+                <td>{{ r.assignment.lastUsedAt ?? 'nie' }}</td>
                 <td>
-                  <button class="btn small" (click)="explain(u.id, r.id)">Why?</button>
+                  <button class="btn small" (click)="explain(u.id, r.id)">Warum?</button>
                 </td>
               </tr>
             }
@@ -71,7 +71,7 @@ import {
           <div class="explain">
             <strong>{{ e.role.id }}</strong> — {{ e.narrative }}
             @if (e.assignment.reason) {
-              <div class="muted">Original reason: {{ e.assignment.reason }}</div>
+              <div class="muted">Ursprünglicher Grund: {{ e.assignment.reason }}</div>
             }
           </div>
         }
@@ -79,16 +79,16 @@ import {
 
       <div class="card">
         <div class="card-head">
-          <h2>Role recommendations</h2>
-          <button class="btn small" (click)="recommend(u.id)">Suggest roles</button>
+          <h2>Rollenempfehlungen</h2>
+          <button class="btn small" (click)="recommend(u.id)">Rollen vorschlagen</button>
         </div>
         @if (recommendations() === null) {
-          <p class="muted">Based on what peers in {{ u.department }} hold.</p>
+          <p class="muted">Basierend auf den Rollen, die Kollegen in der Abteilung {{ u.department }} besitzen.</p>
         } @else if (recommendations()!.length === 0) {
-          <p class="muted">No additional roles recommended — peer coverage is already met.</p>
+          <p class="muted">Keine zusätzlichen Rollen empfohlen — die Abdeckung durch Kollegen ist bereits gegeben.</p>
         } @else {
           <table>
-            <thead><tr><th>Role</th><th>Peer support</th><th>Why</th></tr></thead>
+            <thead><tr><th>Rolle</th><th>Kollegenunterstützung</th><th>Warum</th></tr></thead>
             <tbody>
               @for (rec of recommendations(); track rec.roleId) {
                 <tr>
@@ -102,7 +102,7 @@ import {
         }
       </div>
     } @else {
-      <div class="empty">Loading…</div>
+      <div class="empty">Wird geladen…</div>
     }
   `,
   styles: [
@@ -160,9 +160,9 @@ export class UserDetailComponent {
   protected readonly aiPrompt = computed(() => {
     const u = this.user();
     return u
-      ? `Assess the access risk of user ${u.name} (${u.id}) in department ${u.department}. ` +
-          `Summarise their roles, flag any SAP_ALL, critical Basis transactions, ` +
-          `Segregation-of-Duties conflicts, dormant or cross-department roles, and recommend concrete actions. Use the data tools.`
+      ? `Bewerten Sie das Zugriffsrisiko des Benutzers ${u.name} (${u.id}) in der Abteilung ${u.department}. ` +
+          `Fassen Sie seine Rollen zusammen, weisen Sie auf SAP_ALL, kritische Basis-Transaktionen, ` +
+          `Funktionstrennungskonflikte sowie ruhende oder abteilungsübergreifende Rollen hin und empfehlen Sie konkrete Maßnahmen. Verwenden Sie die Datenwerkzeuge.`
       : '';
   });
   protected readonly explanation = signal<RoleExplanation | null>(null);

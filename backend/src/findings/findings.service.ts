@@ -82,15 +82,15 @@ export class FindingsService {
           roleId: sapAll.id,
           roleName: sapAll.name,
           transactions: ['SAP_ALL'],
-          description: `${user.name} holds the SAP_ALL superuser profile — unrestricted access to the entire system.`,
+          description: `${user.name} besitzt das Superuser-Profil SAP_ALL — uneingeschränkter Zugriff auf das gesamte System.`,
           sourceTables: [TABLES.users, TABLES.assignments, TABLES.authorizations],
           recommendation:
-            'Remove SAP_ALL. Replace with a minimal, task-scoped role. If the user is not a Basis administrator, revoke immediately.',
+            'Entfernen Sie SAP_ALL. Ersetzen Sie es durch eine minimale, aufgabenbezogene Rolle. Falls der Benutzer kein Basis-Administrator ist, sofort entziehen.',
           remediation: [
-            'Confirm whether the user requires emergency/firefighter access.',
-            'Remove the SAP_ALL profile from the user (SU01).',
-            'Assign a least-privilege role covering the actual job function.',
-            'Route any break-glass need through a monitored firefighter (FFID) process.',
+            'Prüfen Sie, ob der Benutzer Notfall-/Firefighter-Zugriff benötigt.',
+            'Entfernen Sie das SAP_ALL-Profil vom Benutzer (SU01).',
+            'Weisen Sie eine Rolle mit minimalen Rechten für die tatsächliche Tätigkeit zu.',
+            'Leiten Sie jeden Notfallbedarf über einen überwachten Firefighter-Prozess (FFID).',
           ],
         });
       }
@@ -106,14 +106,14 @@ export class FindingsService {
           userName: user.name,
           department: user.department,
           transactions: critical,
-          description: `${user.name} can run critical Basis transactions (${critical.join(', ')}) that can alter the system or its security.`,
+          description: `${user.name} kann kritische Basis-Transaktionen (${critical.join(', ')}) ausführen, die das System oder dessen Sicherheit verändern können.`,
           sourceTables: [TABLES.assignments, TABLES.authorizations, TABLES.transactions],
           recommendation:
-            'Restrict critical Basis transactions to a small, named admin group with logging. Remove from business users.',
+            'Beschränken Sie kritische Basis-Transaktionen auf eine kleine, benannte Admin-Gruppe mit Protokollierung. Von Fachbenutzern entfernen.',
           remediation: [
-            'Verify the business justification for each critical transaction.',
-            'Move critical transactions into a dedicated, monitored Basis role.',
-            'Remove the access from the user if not a Basis administrator.',
+            'Prüfen Sie die geschäftliche Begründung für jede kritische Transaktion.',
+            'Verschieben Sie kritische Transaktionen in eine dedizierte, überwachte Basis-Rolle.',
+            'Entfernen Sie den Zugriff vom Benutzer, falls er kein Basis-Administrator ist.',
           ],
         });
       }
@@ -128,14 +128,14 @@ export class FindingsService {
           userName: user.name,
           department: user.department,
           transactions: [],
-          description: `${user.name} is INACTIVE but still holds ${roles.length} active role(s) — a dormant attack surface.`,
+          description: `${user.name} ist INAKTIV, besitzt aber weiterhin ${roles.length} aktive Rolle(n) — eine ruhende Angriffsfläche.`,
           sourceTables: [TABLES.users, TABLES.assignments],
           recommendation:
-            'Lock the account and remove role assignments. Inactive users must not retain authorizations.',
+            'Sperren Sie das Konto und entfernen Sie die Rollenzuweisungen. Inaktive Benutzer dürfen keine Berechtigungen behalten.',
           remediation: [
-            'Lock the user master record (USR02).',
-            'Remove all role assignments (AGR_USERS).',
-            'Archive the account per the leaver process.',
+            'Sperren Sie den Benutzerstammsatz (USR02).',
+            'Entfernen Sie alle Rollenzuweisungen (AGR_USERS).',
+            'Archivieren Sie das Konto gemäß dem Austrittsprozess.',
           ],
         });
       }
@@ -150,14 +150,14 @@ export class FindingsService {
           userName: user.name,
           department: user.department,
           transactions: [],
-          description: `${user.name} holds ${roles.length} roles — well above the norm, indicating accumulated/over-provisioned access.`,
+          description: `${user.name} besitzt ${roles.length} Rollen — weit über dem Normalwert, was auf angesammelte/überprivilegierte Zugriffe hindeutet.`,
           sourceTables: [TABLES.assignments, TABLES.roles],
           recommendation:
-            'Run an access review. Remove roles not used in the last 6 months and consolidate overlapping roles.',
+            'Führen Sie eine Zugriffsüberprüfung durch. Entfernen Sie seit 6 Monaten ungenutzte Rollen und konsolidieren Sie überlappende Rollen.',
           remediation: [
-            'Review each assigned role against the current job function.',
-            'Remove dormant and redundant roles.',
-            'Consider role mining to derive a single right-sized role.',
+            'Überprüfen Sie jede zugewiesene Rolle anhand der aktuellen Tätigkeit.',
+            'Entfernen Sie ruhende und redundante Rollen.',
+            'Erwägen Sie Role Mining, um eine einzige passgenaue Rolle abzuleiten.',
           ],
         });
       }
@@ -177,11 +177,11 @@ export class FindingsService {
         description: f.description,
         sourceTables: [TABLES.assignments, TABLES.authorizations, TABLES.transactions],
         recommendation:
-          'Split the conflicting duties across two people, or remove one of the two roles and enforce four-eyes approval.',
+          'Teilen Sie die widersprüchlichen Aufgaben auf zwei Personen auf oder entfernen Sie eine der beiden Rollen und erzwingen Sie eine Vier-Augen-Freigabe.',
         remediation: [
-          `Decide which capability the user should keep (${f.roleA} or ${f.roleB}).`,
-          'Remove the other role from the user.',
-          'Add a compensating control / approval workflow if both are operationally required.',
+          `Entscheiden Sie, welche Funktion der Benutzer behalten soll (${f.roleA} oder ${f.roleB}).`,
+          'Entfernen Sie die andere Rolle vom Benutzer.',
+          'Fügen Sie eine kompensierende Kontrolle / einen Genehmigungs-Workflow hinzu, falls beide betrieblich erforderlich sind.',
         ],
       });
     }

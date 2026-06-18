@@ -3,13 +3,20 @@ import { RouterLink } from '@angular/router';
 import { ApiService } from '../../core/api.service';
 import { SodFinding, SodRule } from '../../core/models';
 
+const SEVERITY_LABELS: Record<string, string> = {
+  ALL: 'Alle',
+  HIGH: 'Hoch',
+  MEDIUM: 'Mittel',
+  LOW: 'Niedrig',
+};
+
 @Component({
   selector: 'app-risks',
   imports: [RouterLink],
   template: `
     <div class="page-head">
-      <h1>Segregation-of-Duties Risks</h1>
-      <p>Users who hold conflicting capabilities that should be separated.</p>
+      <h1>Funktionstrennungsrisiken (SoD)</h1>
+      <p>Benutzer mit widersprüchlichen Berechtigungen, die getrennt werden sollten.</p>
     </div>
 
     <div class="filters">
@@ -19,18 +26,18 @@ import { SodFinding, SodRule } from '../../core/models';
           [class.btn-primary]="filter() === s"
           (click)="setFilter(s)"
         >
-          {{ s }}
+          {{ severityLabel(s) }}
         </button>
       }
     </div>
 
     <div class="card">
       @if (filtered().length === 0) {
-        <div class="empty">No conflicts for this filter 🎉</div>
+        <div class="empty">Keine Konflikte für diesen Filter 🎉</div>
       } @else {
         <table>
           <thead>
-            <tr><th>User</th><th>Rule</th><th>Conflict</th><th>T-Codes</th><th>Severity</th></tr>
+            <tr><th>Benutzer</th><th>Regel</th><th>Konflikt</th><th>T-Codes</th><th>Schweregrad</th></tr>
           </thead>
           <tbody>
             @for (f of filtered(); track f.userId + f.ruleId) {
@@ -46,7 +53,7 @@ import { SodFinding, SodRule } from '../../core/models';
                     <span class="chip">{{ t }}</span>
                   }
                 </td>
-                <td><span class="sev sev-{{ f.severity }}">{{ f.severity }}</span></td>
+                <td><span class="sev sev-{{ f.severity }}">{{ severityLabel(f.severity) }}</span></td>
               </tr>
             }
           </tbody>
@@ -55,15 +62,15 @@ import { SodFinding, SodRule } from '../../core/models';
     </div>
 
     <div class="card">
-      <h2>Active SoD rule catalogue</h2>
+      <h2>Aktiver SoD-Regelkatalog</h2>
       <table>
-        <thead><tr><th>Rule</th><th>Description</th><th>Severity</th></tr></thead>
+        <thead><tr><th>Regel</th><th>Beschreibung</th><th>Schweregrad</th></tr></thead>
         <tbody>
           @for (r of rules(); track r.id) {
             <tr>
               <td class="mono">{{ r.id }}</td>
               <td class="muted">{{ r.description }}</td>
-              <td><span class="sev sev-{{ r.severity }}">{{ r.severity }}</span></td>
+              <td><span class="sev sev-{{ r.severity }}">{{ severityLabel(r.severity) }}</span></td>
             </tr>
           }
         </tbody>
@@ -119,6 +126,10 @@ export class RisksComponent {
 
   setFilter(s: string): void {
     this.filter.set(s);
+  }
+
+  severityLabel(s: string): string {
+    return SEVERITY_LABELS[s] ?? s;
   }
 }
 

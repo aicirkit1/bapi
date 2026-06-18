@@ -19,14 +19,14 @@ const SPECS: FileSpec[] = [
     slot: 'users',
     file: 'users.csv',
     required: true,
-    title: 'Users',
-    description: 'The people who have SAP accounts (SAP table USR02).',
+    title: 'Benutzer',
+    description: 'Die Personen mit SAP-Konten (SAP-Tabelle USR02).',
     columns: [
-      { name: 'id', desc: 'unique user id, e.g. U1001' },
-      { name: 'name', desc: 'full name' },
-      { name: 'department', desc: 'business unit, e.g. Payments' },
-      { name: 'joinedAt', desc: 'join date, YYYY-MM-DD' },
-      { name: 'status', desc: 'ACTIVE or INACTIVE' },
+      { name: 'id', desc: 'eindeutige Benutzer-ID, z. B. U1001' },
+      { name: 'name', desc: 'vollständiger Name' },
+      { name: 'department', desc: 'Geschäftsbereich, z. B. Payments' },
+      { name: 'joinedAt', desc: 'Eintrittsdatum, JJJJ-MM-TT' },
+      { name: 'status', desc: 'ACTIVE oder INACTIVE' },
     ],
     sample: [
       'id,name,department,joinedAt,status',
@@ -38,14 +38,14 @@ const SPECS: FileSpec[] = [
     slot: 'roles',
     file: 'roles.csv',
     required: true,
-    title: 'Roles',
-    description: 'The SAP roles that can be granted (SAP table AGR_DEFINE).',
+    title: 'Rollen',
+    description: 'Die SAP-Rollen, die zugewiesen werden können (SAP-Tabelle AGR_DEFINE).',
     columns: [
-      { name: 'id', desc: 'role id, e.g. Z_PAY_CREATE' },
-      { name: 'name', desc: 'human-readable name' },
-      { name: 'description', desc: 'what the role does' },
-      { name: 'area', desc: 'business area, e.g. Payments' },
-      { name: 'transactions', desc: 'T-Codes, separated by ;  e.g. F-53;F110' },
+      { name: 'id', desc: 'Rollen-ID, z. B. Z_PAY_CREATE' },
+      { name: 'name', desc: 'lesbarer Name' },
+      { name: 'description', desc: 'was die Rolle bewirkt' },
+      { name: 'area', desc: 'Geschäftsbereich, z. B. Payments' },
+      { name: 'transactions', desc: 'T-Codes, getrennt durch ;  z. B. F-53;F110' },
     ],
     sample: [
       'id,name,description,area,transactions',
@@ -57,15 +57,15 @@ const SPECS: FileSpec[] = [
     slot: 'authorizations',
     file: 'authorizations.csv',
     required: true,
-    title: 'Authorizations',
+    title: 'Berechtigungen',
     description:
-      'Authorization objects each role grants (SAP table AGR_1251).',
+      'Berechtigungsobjekte, die jede Rolle gewährt (SAP-Tabelle AGR_1251).',
     columns: [
-      { name: 'roleId', desc: 'role id this row belongs to' },
-      { name: 'object', desc: 'auth object, e.g. F_BKPF_BUK' },
-      { name: 'field', desc: 'field name, e.g. ACTVT' },
-      { name: 'value', desc: 'value, e.g. 01' },
-      { name: 'tcode', desc: 'transaction code, e.g. F-53' },
+      { name: 'roleId', desc: 'Rollen-ID, zu der diese Zeile gehört' },
+      { name: 'object', desc: 'Berechtigungsobjekt, z. B. F_BKPF_BUK' },
+      { name: 'field', desc: 'Feldname, z. B. ACTVT' },
+      { name: 'value', desc: 'Wert, z. B. 01' },
+      { name: 'tcode', desc: 'Transaktionscode, z. B. F-53' },
     ],
     sample: [
       'roleId,object,field,value,tcode',
@@ -77,15 +77,15 @@ const SPECS: FileSpec[] = [
     slot: 'assignments',
     file: 'assignments.csv',
     required: false,
-    title: 'User → Role assignments',
+    title: 'Benutzer → Rollen-Zuordnungen',
     description:
-      'Which user has which role, and when it was last used (SAP table AGR_USERS). Optional but recommended — it powers "why" explanations and dormancy detection.',
+      'Welcher Benutzer welche Rolle hat und wann sie zuletzt verwendet wurde (SAP-Tabelle AGR_USERS). Optional, aber empfohlen — sie ermöglicht "Warum"-Erläuterungen und die Erkennung inaktiver Berechtigungen.',
     columns: [
-      { name: 'userId', desc: 'user id' },
-      { name: 'roleId', desc: 'role id' },
-      { name: 'assignedAt', desc: 'when granted, YYYY-MM-DD' },
-      { name: 'lastUsedAt', desc: 'last use date, or leave empty if never' },
-      { name: 'reason', desc: 'optional justification text' },
+      { name: 'userId', desc: 'Benutzer-ID' },
+      { name: 'roleId', desc: 'Rollen-ID' },
+      { name: 'assignedAt', desc: 'wann zugewiesen, JJJJ-MM-TT' },
+      { name: 'lastUsedAt', desc: 'Datum der letzten Nutzung, oder leer lassen, falls nie' },
+      { name: 'reason', desc: 'optionaler Begründungstext' },
     ],
     sample: [
       'userId,roleId,assignedAt,lastUsedAt,reason',
@@ -99,16 +99,16 @@ const SPECS: FileSpec[] = [
   selector: 'app-upload',
   template: `
     <div class="page-head">
-      <h1>Data</h1>
-      <p>Bring your own SAP export, or keep exploring with the bundled sample data.</p>
+      <h1>Daten</h1>
+      <p>Bringen Sie Ihren eigenen SAP-Export mit oder erkunden Sie weiter mit den mitgelieferten Beispieldaten.</p>
     </div>
 
     <div class="card info">
-      <strong>ℹ️ You don't need to upload anything to use the demo.</strong>
+      <strong>ℹ️ Sie müssen nichts hochladen, um die Demo zu nutzen.</strong>
       <p class="muted">
-        A realistic sample SAP dataset is already loaded. Use this screen only if you
-        want to analyse <em>your own</em> SAP data. Export the four tables below from SAP
-        (or download a template, fill it in), then upload them here.
+        Ein realistischer SAP-Beispieldatensatz ist bereits geladen. Verwenden Sie diese Ansicht nur, wenn Sie
+        <em>Ihre eigenen</em> SAP-Daten analysieren möchten. Exportieren Sie die vier folgenden Tabellen aus SAP
+        (oder laden Sie eine Vorlage herunter und füllen Sie sie aus) und laden Sie sie anschließend hier hoch.
       </p>
     </div>
 
@@ -119,10 +119,10 @@ const SPECS: FileSpec[] = [
             <div>
               <span class="mono fname">{{ s.file }}</span>
               <span class="badge" [class.req]="s.required">
-                {{ s.required ? 'Required' : 'Optional' }}
+                {{ s.required ? 'Erforderlich' : 'Optional' }}
               </span>
             </div>
-            <button class="btn small" (click)="downloadTemplate(s)">⤓ Template</button>
+            <button class="btn small" (click)="downloadTemplate(s)">⤓ Vorlage</button>
           </div>
           <p class="desc">{{ s.description }}</p>
 
@@ -138,14 +138,14 @@ const SPECS: FileSpec[] = [
           </table>
 
           <div class="example">
-            <span class="ex-label">Example</span>
+            <span class="ex-label">Beispiel</span>
             <code>{{ s.sample[1] }}</code>
           </div>
 
           <label class="drop" [class.has]="files[s.slot]">
             <input type="file" accept=".csv" (change)="pick(s.slot, $event)" hidden />
             <span class="drop-icon">{{ files[s.slot] ? '✓' : '⤒' }}</span>
-            <span>{{ files[s.slot]?.name ?? 'Choose ' + s.file + ' …' }}</span>
+            <span>{{ files[s.slot]?.name ?? s.file + ' auswählen …' }}</span>
           </label>
         </div>
       }
@@ -154,17 +154,17 @@ const SPECS: FileSpec[] = [
     <div class="card actions-card">
       <div class="actions">
         <button class="btn btn-primary" [disabled]="!canUpload() || busy()" (click)="upload()">
-          Upload &amp; analyse
+          Hochladen &amp; analysieren
         </button>
         <button class="btn" [disabled]="busy()" (click)="reset()">
-          Reset to sample data
+          Auf Beispieldaten zurücksetzen
         </button>
         <span class="muted hint">
           @if (canUpload()) {
-            Ready — the 3 required files are selected.
+            Bereit — die 3 erforderlichen Dateien sind ausgewählt.
           } @else {
-            Select <strong>users</strong>, <strong>roles</strong> and
-            <strong>authorizations</strong> to enable upload.
+            Wählen Sie <strong>users</strong>, <strong>roles</strong> und
+            <strong>authorizations</strong> aus, um den Upload zu aktivieren.
           }
         </span>
       </div>
@@ -359,8 +359,8 @@ export class UploadComponent {
     this.busy.set(true);
     this.message.set(null);
     this.api.upload(form).subscribe({
-      next: (r: unknown) => this.done(`Uploaded. ${summary(r)}`, false),
-      error: (e) => this.done(e?.error?.message ?? 'Upload failed.', true),
+      next: (r: unknown) => this.done(`Hochgeladen. ${summary(r)}`, false),
+      error: (e) => this.done(e?.error?.message ?? 'Upload fehlgeschlagen.', true),
     });
   }
 
@@ -368,8 +368,8 @@ export class UploadComponent {
     this.busy.set(true);
     this.message.set(null);
     this.api.reset().subscribe({
-      next: (r: unknown) => this.done(`Reset to sample data. ${summary(r)}`, false),
-      error: () => this.done('Reset failed.', true),
+      next: (r: unknown) => this.done(`Auf Beispieldaten zurückgesetzt. ${summary(r)}`, false),
+      error: () => this.done('Zurücksetzen fehlgeschlagen.', true),
     });
   }
 
@@ -383,5 +383,5 @@ export class UploadComponent {
 function summary(r: unknown): string {
   const d = r as Record<string, number>;
   if (!d || typeof d['users'] !== 'number') return '';
-  return `${d['users']} users, ${d['roles']} roles, ${d['authorizations']} authorizations, ${d['sodFindings']} SoD findings.`;
+  return `${d['users']} Benutzer, ${d['roles']} Rollen, ${d['authorizations']} Berechtigungen, ${d['sodFindings']} Funktionstrennungsbefunde.`;
 }

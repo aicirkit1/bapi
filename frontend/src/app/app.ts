@@ -31,33 +31,33 @@ export class App {
 
   protected readonly groups: NavGroup[] = [
     {
-      title: 'Onboarding',
+      title: 'Einrichtung',
       items: [
-        { path: '/connect', label: 'Connect SAP', icon: '🔌' },
-        { path: '/connectors', label: 'Connectors', icon: '◧' },
-        { path: '/sync', label: 'Data Sync', icon: '⟳' },
+        { path: '/connect', label: 'SAP verbinden', icon: '🔌' },
+        { path: '/connectors', label: 'Konnektoren', icon: '◧' },
+        { path: '/sync', label: 'Datensynchronisation', icon: '⟳' },
       ],
     },
     {
-      title: 'Analysis',
+      title: 'Analyse',
       items: [
         { path: '/dashboard', label: 'Dashboard', icon: '▣' },
-        { path: '/findings', label: 'Risk Findings', icon: '⚠' },
-        { path: '/graph', label: 'Access Graph', icon: '◈' },
-        { path: '/chat', label: 'AI Chat', icon: '✦' },
-        { path: '/report', label: 'Audit Report', icon: '⎙' },
+        { path: '/findings', label: 'Risikobefunde', icon: '⚠' },
+        { path: '/graph', label: 'Zugriffsgraph', icon: '◈' },
+        { path: '/chat', label: 'KI-Chat', icon: '✦' },
+        { path: '/report', label: 'Prüfbericht', icon: '⎙' },
       ],
     },
     {
-      title: 'Explore',
+      title: 'Erkunden',
       items: [
-        { path: '/users', label: 'Users', icon: '◍' },
-        { path: '/roles', label: 'Roles', icon: '⬡' },
-        { path: '/upload', label: 'Data', icon: '⤓' },
+        { path: '/users', label: 'Benutzer', icon: '◍' },
+        { path: '/roles', label: 'Rollen', icon: '⬡' },
+        { path: '/upload', label: 'Daten', icon: '⤓' },
       ],
     },
     {
-      title: 'BSH Mock',
+      title: 'BSH-Mock',
       items: [
         { path: '/brk', label: 'Berechtigungskonzept', icon: '▦' },
       ],

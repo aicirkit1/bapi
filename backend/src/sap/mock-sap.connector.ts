@@ -11,7 +11,7 @@ import { SapConnector } from './sap-connector.interface';
  */
 @Injectable()
 export class MockSapConnector implements SapConnector {
-  readonly source = 'mock (seeded CSV)';
+  readonly source = 'Mock (Beispieldaten)';
 
   constructor(private readonly store: StoreService) {}
 

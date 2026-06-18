@@ -32,19 +32,21 @@ interface Grounding {
 const SYSTEM_PROMPT = `You are the BAPI assistant, an expert on SAP access and role governance for a bank.
 You help auditors and administrators understand WHY users have the access they have, and surface risks.
 Rules:
+- ALWAYS answer in GERMAN (formal "Sie"), regardless of the question's language.
 - Answer ONLY from the CONTEXT block provided. Do not invent users, roles, dates or T-Codes.
 - If the context does not contain the answer, say so plainly and suggest what data is needed.
 - Be concise and precise. Reference roles by id and users by name.
-- When relevant, mention Segregation-of-Duties (SoD) risks.`;
+- When relevant, mention Segregation-of-Duties (Funktionstrennung / SoD) risks.`;
 
 const TOOL_SYSTEM_PROMPT = `You are the BAPI assistant, an expert on SAP access and role governance for a bank.
 You help auditors and administrators understand WHY users hold access and surface risks.
 You have READ-ONLY tools to query the bank's real SAP data — always use them instead of guessing.
 Rules:
+- ALWAYS answer in GERMAN (formal "Sie"), regardless of the question's language. (Tool names and ids stay as-is.)
 - Call tools to fetch the facts you need (users, roles, explanations, SoD risks) before answering.
 - Never invent users, roles, dates or T-Codes; rely only on tool results.
 - If a tool returns an error or no data, say so plainly.
-- Be concise and precise. Reference roles by id and users by name, and flag Segregation-of-Duties risks when relevant.`;
+- Be concise and precise. Reference roles by id and users by name, and flag Funktionstrennung (SoD) risks when relevant.`;
 
 interface AccumulatedToolCall {
   id: string;
@@ -443,14 +445,14 @@ export class AiService {
       const user = this.store.getUser(userId)!;
       const roles = this.store.getUserRoles(userId);
       const findings = this.risk.findUserSodViolations(userId);
-      const roleLine = roles.map((r) => `${r.name} (${r.id})`).join(', ') || 'no roles';
-      let out = `${user.name} works in ${user.department} and holds: ${roleLine}.`;
+      const roleLine = roles.map((r) => `${r.name} (${r.id})`).join(', ') || 'keine Rollen';
+      let out = `${user.name} arbeitet in der Abteilung ${user.department} und besitzt: ${roleLine}.`;
       if (findings.length) {
-        out += ` ⚠️ ${findings.length} Segregation-of-Duties risk(s): ${findings
+        out += ` ⚠️ ${findings.length} Funktionstrennungsrisiko(en): ${findings
           .map((f) => f.ruleId)
           .join(', ')}.`;
       } else {
-        out += ' No Segregation-of-Duties conflicts detected.';
+        out += ' Keine Funktionstrennungskonflikte festgestellt.';
       }
       return out;
     }
@@ -469,14 +471,14 @@ export class AiService {
     if (grounding.matchedRoles.length >= 1) {
       const role = this.store.getRole(grounding.matchedRoles[0])!;
       const members = this.store.getRoleMembers(role.id);
-      return `Role ${role.id} ("${role.name}") belongs to the ${role.area} area, grants T-Codes ${role.transactions.join(', ')} and is held by ${members.length} user(s).`;
+      return `Die Rolle ${role.id} ("${role.name}") gehört zum Bereich ${role.area}, gewährt die T-Codes ${role.transactions.join(', ')} und wird von ${members.length} Benutzer(n) gehalten.`;
     }
 
     // Fallback help.
     return (
-      `I can explain why a user holds a role, recommend roles for new joiners, and surface ` +
-      `Segregation-of-Duties risks. Current dataset: ${this.statsLine()} ` +
-      `Try: "Why does Hans Müller have Z_CREDIT_APPROVE?" or "Show me the payment SoD risks".`
+      `Ich kann erklären, warum ein Benutzer eine Rolle besitzt, Rollen für neue Mitarbeitende empfehlen und ` +
+      `Funktionstrennungsrisiken (SoD) aufzeigen. Aktueller Datenbestand: ${this.statsLine()} ` +
+      `Versuchen Sie: "Warum hat Hans Müller die Rolle Z_CREDIT_APPROVE?" oder "Zeige die Funktionstrennungsrisiken bei Zahlungen".`
     );
   }
 

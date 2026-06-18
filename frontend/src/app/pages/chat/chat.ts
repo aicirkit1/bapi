@@ -22,10 +22,11 @@ interface Turn extends ChatMessage {
   imports: [FormsModule],
   template: `
     <div class="page-head">
-      <h1>AI Chat</h1>
+      <h1>KI-Chat</h1>
       <p>
-        Streams live and uses read-only tools to query the bank's SAP data —
-        answers show which tools they called.
+        Antwortet live und nutzt nur lesende Werkzeuge, um die SAP-Daten der
+        Bank abzufragen — die Antworten zeigen, welche Werkzeuge aufgerufen
+        wurden.
       </p>
     </div>
 
@@ -33,7 +34,7 @@ interface Turn extends ChatMessage {
       <div class="messages" #scroller (scroll)="onScroll()">
         @if (turns().length === 0) {
           <div class="welcome">
-            <p class="muted">Try one of these:</p>
+            <p class="muted">Probieren Sie eine dieser Fragen:</p>
             <div class="suggestions">
               @for (s of suggestions; track s) {
                 <button class="chip clickable" (click)="ask(s)">{{ s }}</button>
@@ -44,7 +45,7 @@ interface Turn extends ChatMessage {
 
         @for (t of turns(); track $index) {
           <div class="turn" [class.user]="t.role === 'user'">
-            <div class="avatar">{{ t.role === 'user' ? 'You' : 'AI' }}</div>
+            <div class="avatar">{{ t.role === 'user' ? 'Sie' : 'KI' }}</div>
             <div class="bubble">
               @if (t.role === 'assistant' && t.toolsUsed?.length) {
                 <div class="tools">
@@ -61,7 +62,7 @@ interface Turn extends ChatMessage {
               }
               @if (t.role === 'assistant' && !t.streaming && t.mode) {
                 <div class="mode">
-                  {{ t.mode === 'llm' ? 'live model' : 'offline mock' }}
+                  {{ t.mode === 'llm' ? 'Live-Modell' : 'Offline-Mock' }}
                 </div>
               }
             </div>
@@ -74,12 +75,12 @@ interface Turn extends ChatMessage {
           class="input"
           [(ngModel)]="draft"
           name="draft"
-          placeholder="Ask about a user, role or risk…"
+          placeholder="Fragen Sie zu einem Benutzer, einer Rolle oder einem Risiko…"
           autocomplete="off"
           [disabled]="loading()"
         />
         <button class="btn btn-primary" [disabled]="loading() || !draft.trim()">
-          Send
+          Senden
         </button>
       </form>
     </div>
@@ -209,10 +210,10 @@ export class ChatComponent {
   protected readonly loading = signal(false);
   protected readonly turns = signal<Turn[]>([]);
   protected readonly suggestions = [
-    'Why does Hans Müller have Z_CREDIT_APPROVE?',
-    'Show me the payment SoD risks',
-    'Tell me about Thomas Weber',
-    'What are the biggest access risks and what should we fix first?',
+    'Warum hat Hans Müller die Rolle Z_CREDIT_APPROVE?',
+    'Zeige die Funktionstrennungsrisiken bei Zahlungen',
+    'Informationen zu Thomas Weber',
+    'Was sind die größten Zugriffsrisiken und was sollten wir zuerst beheben?',
   ];
 
   constructor() {
@@ -282,7 +283,7 @@ export class ChatComponent {
           patchLast((t) => ({
             ...t,
             streaming: false,
-            content: t.content || `Error: ${e.message}`,
+            content: t.content || `Fehler: ${e.message}`,
           }));
         }
       })
@@ -292,7 +293,7 @@ export class ChatComponent {
           streaming: false,
           content:
             t.content ||
-            'Sorry — the backend is unreachable. Is it running on :4000?',
+            'Entschuldigung – das Backend ist nicht erreichbar. Läuft es auf :4000?',
         }));
       })
       .finally(() => this.loading.set(false));

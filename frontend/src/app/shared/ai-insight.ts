@@ -18,11 +18,11 @@ import { ApiService } from '../core/api.service';
         <span class="ai-title">✦ {{ label() }}</span>
         @if (started()) {
           <button class="btn small" [disabled]="streaming()" (click)="run()">
-            {{ streaming() ? 'Thinking…' : '↻ Regenerate' }}
+            {{ streaming() ? 'Denkt nach…' : '↻ Neu generieren' }}
           </button>
         } @else {
           <button class="btn small btn-primary" [disabled]="!prompt()" (click)="run()">
-            Generate
+            Generieren
           </button>
         }
       </div>
@@ -43,7 +43,7 @@ import { ApiService } from '../core/api.service';
             <span class="typing">●●●</span>
           }
           @if (!streaming() && mode()) {
-            <div class="mode">{{ mode() === 'llm' ? 'live model' : 'offline mock' }}</div>
+            <div class="mode">{{ mode() === 'llm' ? 'Live-Modell' : 'Offline-Mock' }}</div>
           }
         </div>
       } @else {
@@ -120,8 +120,8 @@ export class AiInsightComponent {
   private readonly api = inject(ApiService);
 
   readonly prompt = input.required<string>();
-  readonly label = input('AI insight');
-  readonly hint = input('Generate an AI explanation grounded in this data.');
+  readonly label = input('KI-Analyse');
+  readonly hint = input('Erstellen Sie eine KI-Erläuterung auf Basis dieser Daten.');
   readonly auto = input(false);
 
   protected readonly started = signal(false);
@@ -166,7 +166,7 @@ export class AiInsightComponent {
       })
       .catch(() => {
         this.answer.set(
-          this.answer() || 'AI is unreachable. Is the backend running on :4000?',
+          this.answer() || 'KI nicht erreichbar. Läuft das Backend auf :4000?',
         );
         this.streaming.set(false);
       });

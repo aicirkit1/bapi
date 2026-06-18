@@ -3,18 +3,31 @@ import { ApiService } from '../../core/api.service';
 import { AuditReport } from '../../core/models';
 import { AiInsightComponent } from '../../shared/ai-insight';
 
+const SEVERITY_LABELS: Record<string, string> = {
+  HIGH: 'Hoch',
+  MEDIUM: 'Mittel',
+  LOW: 'Niedrig',
+};
+
+const BAND_LABELS: Record<string, string> = {
+  CRITICAL: 'Kritisch',
+  HIGH: 'Hoch',
+  MEDIUM: 'Mittel',
+  LOW: 'Niedrig',
+};
+
 @Component({
   selector: 'app-report',
   imports: [AiInsightComponent],
   template: `
     <div class="page-head row no-print">
       <div>
-        <h1>Audit Report</h1>
-        <p>Auditor-ready snapshot of the SAP access landscape.</p>
+        <h1>Prüfbericht</h1>
+        <p>Prüfungsfertige Momentaufnahme der SAP-Zugriffslandschaft.</p>
       </div>
       <div class="actions">
-        <button class="btn" (click)="exportJson()">⤓ Export JSON</button>
-        <button class="btn btn-primary" (click)="print()">⎙ Print / Save as PDF</button>
+        <button class="btn" (click)="exportJson()">⤓ JSON exportieren</button>
+        <button class="btn btn-primary" (click)="print()">⎙ Drucken / Als PDF speichern</button>
       </div>
     </div>
 
@@ -25,36 +38,36 @@ import { AiInsightComponent } from '../../shared/ai-insight';
             <div class="brand-line">BAPI · SAP Access Intelligence</div>
             <h2>{{ r.title }}</h2>
           </div>
-          <div class="gen muted">Generated<br />{{ format(r.generatedAt) }}</div>
+          <div class="gen muted">Erstellt<br />{{ format(r.generatedAt) }}</div>
         </div>
 
         <app-ai-insight
-          label="AI Executive Summary"
+          label="KI-Management-Zusammenfassung"
           [auto]="true"
           prompt="Write a 4-6 sentence executive summary for an audit report on this bank's SAP access governance: overall posture, the most serious risks (SAP_ALL, critical Basis access, Segregation-of-Duties), inactive users with roles, and the recommended priorities. Use the data tools."
         />
 
-        <h3>1. Executive summary</h3>
+        <h3>1. Management-Zusammenfassung</h3>
         <div class="summary">
-          <div class="stat"><span>{{ r.summary['users'] }}</span>Users</div>
-          <div class="stat"><span>{{ r.summary['roles'] }}</span>Roles</div>
-          <div class="stat"><span>{{ r.summary['assignments'] }}</span>Assignments</div>
-          <div class="stat danger"><span>{{ r.summary['sodFindings'] }}</span>SoD conflicts</div>
-          <div class="stat danger"><span>{{ r.summary['criticalUsers'] }}</span>Critical users</div>
-          <div class="stat warn"><span>{{ r.summary['dormantRoleAssignments'] }}</span>Dormant roles</div>
+          <div class="stat"><span>{{ r.summary['users'] }}</span>Benutzer</div>
+          <div class="stat"><span>{{ r.summary['roles'] }}</span>Rollen</div>
+          <div class="stat"><span>{{ r.summary['assignments'] }}</span>Zuweisungen</div>
+          <div class="stat danger"><span>{{ r.summary['sodFindings'] }}</span>SoD-Konflikte</div>
+          <div class="stat danger"><span>{{ r.summary['criticalUsers'] }}</span>Kritische Benutzer</div>
+          <div class="stat warn"><span>{{ r.summary['dormantRoleAssignments'] }}</span>Ruhende Rollen</div>
         </div>
         <p class="note">
-          The bank holds <strong>{{ r.summary['sodFindings'] }}</strong>
-          Segregation-of-Duties conflicts ({{ r.summary['sodHigh'] }} high
-          severity), <strong>{{ r.summary['overPrivilegedUsers'] }}</strong>
-          over-privileged users and
+          Die Bank weist <strong>{{ r.summary['sodFindings'] }}</strong>
+          Funktionstrennungskonflikte (SoD) auf ({{ r.summary['sodHigh'] }} mit hohem
+          Schweregrad), <strong>{{ r.summary['overPrivilegedUsers'] }}</strong>
+          überprivilegierte Benutzer und
           <strong>{{ r.summary['crossDepartmentAssignments'] }}</strong>
-          cross-department role assignments that warrant review.
+          abteilungsübergreifende Rollenzuweisungen, die eine Prüfung erfordern.
         </p>
 
-        <h3>2. Risk by department</h3>
+        <h3>2. Risiko nach Abteilung</h3>
         <table>
-          <thead><tr><th>Department</th><th>Users</th><th>SoD findings</th><th>Avg risk</th></tr></thead>
+          <thead><tr><th>Abteilung</th><th>Benutzer</th><th>SoD-Befunde</th><th>Durchschn. Risiko</th></tr></thead>
           <tbody>
             @for (b of r.byDepartment; track b.department) {
               <tr>
@@ -67,58 +80,58 @@ import { AiInsightComponent } from '../../shared/ai-insight';
           </tbody>
         </table>
 
-        <h3>3. Highest-risk users</h3>
+        <h3>3. Benutzer mit höchstem Risiko</h3>
         <table>
-          <thead><tr><th>User</th><th>Dept</th><th>Score</th><th>Band</th><th>Key factors</th></tr></thead>
+          <thead><tr><th>Benutzer</th><th>Abt.</th><th>Bewertung</th><th>Risikostufe</th><th>Hauptfaktoren</th></tr></thead>
           <tbody>
             @for (u of r.topRiskyUsers; track u.userId) {
               <tr>
                 <td>{{ u.userName }} <span class="mono muted">{{ u.userId }}</span></td>
                 <td>{{ u.department }}</td>
                 <td><strong>{{ u.score }}</strong></td>
-                <td><span class="sev sev-{{ u.band === 'CRITICAL' ? 'HIGH' : u.band }}">{{ u.band }}</span></td>
+                <td><span class="sev sev-{{ u.band === 'CRITICAL' ? 'HIGH' : u.band }}">{{ bandLabel(u.band) }}</span></td>
                 <td class="muted small">{{ factorList(u) }}</td>
               </tr>
             }
           </tbody>
         </table>
 
-        <h3>4. Segregation-of-Duties findings</h3>
+        <h3>4. Funktionstrennungsbefunde (SoD)</h3>
         <table>
-          <thead><tr><th>User</th><th>Conflict</th><th>Roles</th><th>Severity</th></tr></thead>
+          <thead><tr><th>Benutzer</th><th>Konflikt</th><th>Rollen</th><th>Schweregrad</th></tr></thead>
           <tbody>
             @for (f of r.sodFindings; track f.userId + f.ruleId) {
               <tr>
                 <td>{{ f.userName }}</td>
                 <td>{{ f.ruleId }}<div class="muted small">{{ f.description }}</div></td>
                 <td class="mono">{{ f.roleA }} + {{ f.roleB }}</td>
-                <td><span class="sev sev-{{ f.severity }}">{{ f.severity }}</span></td>
+                <td><span class="sev sev-{{ f.severity }}">{{ severityLabel(f.severity) }}</span></td>
               </tr>
             }
           </tbody>
         </table>
 
-        <h3>5. Dormant access (top 30)</h3>
+        <h3>5. Ruhender Zugriff (Top 30)</h3>
         <table>
-          <thead><tr><th>User</th><th>Role</th><th>Months unused</th><th>Last used</th></tr></thead>
+          <thead><tr><th>Benutzer</th><th>Rolle</th><th>Monate ungenutzt</th><th>Zuletzt verwendet</th></tr></thead>
           <tbody>
             @for (d of r.dormant; track d.userId + d.roleId) {
               <tr>
                 <td>{{ d.userName }} <span class="mono muted">{{ d.userId }}</span></td>
                 <td class="mono">{{ d.roleId }}</td>
                 <td>{{ d.monthsUnused ?? '—' }}</td>
-                <td>{{ d.lastUsedAt ?? 'never' }}</td>
+                <td>{{ d.lastUsedAt ?? 'nie' }}</td>
               </tr>
             }
           </tbody>
         </table>
 
         <div class="foot muted">
-          Generated by BAPI · {{ format(r.generatedAt) }} · Data source: mock (seeded SAP export)
+          Erstellt von BAPI · {{ format(r.generatedAt) }} · Datenquelle: Mock (initialer SAP-Export)
         </div>
       </div>
     } @else {
-      <div class="empty">Building report…</div>
+      <div class="empty">Bericht wird erstellt…</div>
     }
   `,
   styles: [
@@ -230,6 +243,14 @@ export class ReportComponent {
 
   protected factorList(u: AuditReport['topRiskyUsers'][number]): string {
     return u.factors.map((f) => f.label).join('; ');
+  }
+
+  protected severityLabel(s: string): string {
+    return SEVERITY_LABELS[s] ?? s;
+  }
+
+  protected bandLabel(b: string): string {
+    return BAND_LABELS[b] ?? b;
   }
 
   protected print(): void {

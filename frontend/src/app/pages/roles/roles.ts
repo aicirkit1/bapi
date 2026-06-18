@@ -9,8 +9,8 @@ import { Role } from '../../core/models';
   imports: [FormsModule, RouterLink],
   template: `
     <div class="page-head">
-      <h1>Roles</h1>
-      <p>{{ roles().length }} SAP roles in the model.</p>
+      <h1>Rollen</h1>
+      <p>{{ roles().length }} SAP-Rollen im Modell.</p>
     </div>
 
     <div class="card">
@@ -18,14 +18,14 @@ import { Role } from '../../core/models';
         class="input search"
         [(ngModel)]="query"
         (ngModelChange)="search()"
-        placeholder="Search roles…"
+        placeholder="Rollen suchen…"
       />
       @if (roles().length === 0) {
-        <div class="empty">No roles match.</div>
+        <div class="empty">Keine Rollen entsprechen Ihrer Suche.</div>
       } @else {
         <table>
           <thead>
-            <tr><th>Role ID</th><th>Name</th><th>Area</th><th>T-Codes</th><th>Members</th></tr>
+            <tr><th>Rollen-ID</th><th>Name</th><th>Bereich</th><th>T-Codes</th><th>Mitglieder</th></tr>
           </thead>
           <tbody>
             @for (r of roles(); track r.id) {

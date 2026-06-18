@@ -8,14 +8,14 @@ import { SyncStatus } from '../../core/models';
   imports: [RouterLink],
   template: `
     <div class="page-head">
-      <h1>Data Synchronisation</h1>
-      <p>Importing SAP master data and running the risk analysis.</p>
+      <h1>Datensynchronisation</h1>
+      <p>SAP-Stammdaten werden importiert und die Risikoanalyse wird ausgeführt.</p>
     </div>
 
     @if (status(); as s) {
       <div class="card">
         <div class="bar-head">
-          <strong>{{ s.done ? 'Sync complete' : 'Syncing…' }}</strong>
+          <strong>{{ s.done ? 'Synchronisation abgeschlossen' : 'Synchronisierung…' }}</strong>
           <span class="pct">{{ s.progress }}%</span>
         </div>
         <div class="bar">
@@ -33,7 +33,7 @@ import { SyncStatus } from '../../core/models';
                 <span class="chip">{{ step.table }}</span>
               }
               @if (step.count !== undefined) {
-                <span class="count">{{ step.count }} records</span>
+                <span class="count">{{ step.count }} Datensätze</span>
               }
             </div>
           }
@@ -41,13 +41,13 @@ import { SyncStatus } from '../../core/models';
 
         @if (s.done) {
           <div class="done-cta">
-            <span>✓ Imported and analysed. Your risk dashboard is ready.</span>
-            <a routerLink="/dashboard" class="btn btn-primary">Open Dashboard →</a>
+            <span>✓ Importiert und analysiert. Ihr Risiko-Dashboard ist bereit.</span>
+            <a routerLink="/dashboard" class="btn btn-primary">Dashboard öffnen →</a>
           </div>
         }
       </div>
     } @else {
-      <div class="empty">Starting sync…</div>
+      <div class="empty">Synchronisation wird gestartet…</div>
     }
   `,
   styles: [

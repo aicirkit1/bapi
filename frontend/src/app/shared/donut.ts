@@ -111,7 +111,7 @@ export interface DonutSegment {
 })
 export class DonutComponent {
   readonly segments = input.required<DonutSegment[]>();
-  readonly caption = input<string>('total');
+  readonly caption = input<string>('Gesamt');
 
   protected readonly total = computed(() =>
     this.segments().reduce((s, x) => s + x.value, 0),

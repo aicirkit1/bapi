@@ -34,13 +34,13 @@ export class SyncService {
       jobId,
       startedAt: Date.now(),
       steps: [
-        { key: 'users', label: 'USR02 users imported', table: 'USR02' },
-        { key: 'assignments', label: 'AGR_USERS role assignments imported', table: 'AGR_USERS' },
-        { key: 'authorizations', label: 'AGR_1251 authorizations imported', table: 'AGR_1251' },
-        { key: 'roles', label: 'AGR_DEFINE roles imported', table: 'AGR_DEFINE' },
-        { key: 'transactions', label: 'TSTCT transactions imported', table: 'TSTCT' },
-        { key: 'critical', label: 'Critical access rules loaded', table: 'SACF' },
-        { key: 'risk', label: 'Risk analysis completed', table: '—' },
+        { key: 'users', label: 'USR02-Benutzer importiert', table: 'USR02' },
+        { key: 'assignments', label: 'AGR_USERS-Rollenzuweisungen importiert', table: 'AGR_USERS' },
+        { key: 'authorizations', label: 'AGR_1251-Berechtigungen importiert', table: 'AGR_1251' },
+        { key: 'roles', label: 'AGR_DEFINE-Rollen importiert', table: 'AGR_DEFINE' },
+        { key: 'transactions', label: 'TSTCT-Transaktionen importiert', table: 'TSTCT' },
+        { key: 'critical', label: 'Kritische Zugriffsregeln geladen', table: 'SACF' },
+        { key: 'risk', label: 'Risikoanalyse abgeschlossen', table: '—' },
       ],
     });
     return { jobId };

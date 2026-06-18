@@ -16,6 +16,12 @@ const SEV_COLORS: Record<string, string> = {
   MEDIUM: '#e8920c',
   LOW: '#2f9e44',
 };
+const BAND_LABELS: Record<string, string> = {
+  CRITICAL: 'Kritisch',
+  HIGH: 'Hoch',
+  MEDIUM: 'Mittel',
+  LOW: 'Niedrig',
+};
 
 @Component({
   selector: 'app-dashboard',
@@ -23,66 +29,66 @@ const SEV_COLORS: Record<string, string> = {
   template: `
     <div class="page-head row">
       <div>
-        <h1>Access Risk Overview</h1>
-        <p>Live posture across the bank's SAP access landscape.</p>
+        <h1>Übersicht der Zugriffsrisiken</h1>
+        <p>Aktuelle Lage der SAP-Zugriffslandschaft der Bank in Echtzeit.</p>
       </div>
       <div class="head-actions">
-        <a routerLink="/graph" class="btn">◈ Access graph</a>
-        <a routerLink="/report" class="btn btn-primary">⎙ Audit report</a>
+        <a routerLink="/graph" class="btn">◈ Zugriffsgraph</a>
+        <a routerLink="/report" class="btn btn-primary">⎙ Prüfbericht</a>
       </div>
     </div>
 
     <app-ai-insight
-      label="AI executive summary"
-      hint="Generate a management-level summary of the current access-risk posture and the top priorities."
+      label="KI-Management-Zusammenfassung"
+      hint="Erstellen Sie eine Zusammenfassung der aktuellen Zugriffsrisikolage und der wichtigsten Prioritäten auf Management-Ebene."
       prompt="Give a concise executive summary (5-6 sentences) of this bank's SAP access-risk posture: how many users hold SAP_ALL, the most serious Segregation-of-Duties and critical-access risks, inactive users with roles, and the top 3 things to fix first. Use the data tools."
     />
 
     @if (data(); as d) {
       <div class="kpis">
         <div class="card kpi">
-          <span class="kpi-label">Users</span>
+          <span class="kpi-label">Benutzer</span>
           <span class="kpi-value">{{ d.totals.users }}</span>
-          <span class="muted">{{ d.totals.departments }} departments</span>
+          <span class="muted">{{ d.totals.departments }} Abteilungen</span>
         </div>
         <div class="card kpi">
-          <span class="kpi-label">Roles</span>
+          <span class="kpi-label">Rollen</span>
           <span class="kpi-value">{{ d.totals.roles }}</span>
-          <span class="muted">{{ d.totals.assignments }} assignments</span>
+          <span class="muted">{{ d.totals.assignments }} Zuweisungen</span>
         </div>
         <div class="card kpi danger">
-          <span class="kpi-label">Critical users</span>
+          <span class="kpi-label">Kritische Benutzer</span>
           <span class="kpi-value">{{ d.riskBands.CRITICAL }}</span>
-          <span class="muted">risk score ≥ 70</span>
+          <span class="muted">Risikobewertung ≥ 70</span>
         </div>
         <div class="card kpi danger">
-          <span class="kpi-label">Users with SAP_ALL</span>
+          <span class="kpi-label">Benutzer mit SAP_ALL</span>
           <span class="kpi-value">{{ fs()?.usersWithSapAll ?? '—' }}</span>
-          <span class="muted">unrestricted superuser</span>
+          <span class="muted">uneingeschränkter Superuser</span>
         </div>
         <div class="card kpi danger">
-          <span class="kpi-label">Total risk findings</span>
+          <span class="kpi-label">Risikobefunde gesamt</span>
           <span class="kpi-value">{{ fs()?.total ?? sodTotal(d) }}</span>
-          <span class="muted">{{ fs()?.critical ?? d.sodBySeverity.HIGH }} high severity</span>
+          <span class="muted">{{ fs()?.critical ?? d.sodBySeverity.HIGH }} hoher Schweregrad</span>
         </div>
         <div class="card kpi warn">
-          <span class="kpi-label">Inactive w/ roles</span>
+          <span class="kpi-label">Inaktiv mit Rollen</span>
           <span class="kpi-value">{{ fs()?.inactiveWithRoles ?? '—' }}</span>
-          <span class="muted">{{ d.dormantRoleAssignments }} dormant roles</span>
+          <span class="muted">{{ d.dormantRoleAssignments }} ruhende Rollen</span>
         </div>
       </div>
 
       <div class="charts">
         <div class="card">
-          <h2>SoD conflicts by severity</h2>
-          <app-donut [segments]="sodSegments()" caption="conflicts" />
+          <h2>Funktionstrennungskonflikte nach Schweregrad</h2>
+          <app-donut [segments]="sodSegments()" caption="Konflikte" />
         </div>
         <div class="card">
-          <h2>Users by risk band</h2>
-          <app-donut [segments]="bandSegments()" caption="users" />
+          <h2>Benutzer nach Risikostufe</h2>
+          <app-donut [segments]="bandSegments()" caption="Benutzer" />
         </div>
         <div class="card dept">
-          <h2>Average risk by department</h2>
+          <h2>Durchschnittsrisiko nach Abteilung</h2>
           <div class="bars">
             @for (b of d.byDepartment; track b.department) {
               <div class="bar-row">
@@ -103,14 +109,14 @@ const SEV_COLORS: Record<string, string> = {
 
       <div class="card">
         <div class="card-head">
-          <h2>Highest-risk users</h2>
-          <a routerLink="/findings" class="link">All findings →</a>
+          <h2>Benutzer mit höchstem Risiko</h2>
+          <a routerLink="/findings" class="link">Alle Befunde →</a>
         </div>
         <table>
           <thead>
             <tr>
-              <th>User</th><th>Department</th><th>Risk score</th>
-              <th>SoD</th><th>Dormant</th><th>Roles</th>
+              <th>Benutzer</th><th>Abteilung</th><th>Risikobewertung</th>
+              <th>SoD</th><th>Ruhend</th><th>Rollen</th>
             </tr>
           </thead>
           <tbody>
@@ -131,7 +137,7 @@ const SEV_COLORS: Record<string, string> = {
                       {{ u.score }}
                     </span>
                     <span class="sev sev-{{ u.band === 'CRITICAL' ? 'HIGH' : u.band }}">
-                      {{ u.band }}
+                      {{ bandLabel(u.band) }}
                     </span>
                   </div>
                 </td>
@@ -144,7 +150,7 @@ const SEV_COLORS: Record<string, string> = {
         </table>
       </div>
     } @else {
-      <div class="empty">Loading analytics…</div>
+      <div class="empty">Analysen werden geladen…</div>
     }
   `,
   styles: [
@@ -295,9 +301,9 @@ export class DashboardComponent {
     const d = this.data();
     if (!d) return [];
     return [
-      { label: 'High', value: d.sodBySeverity.HIGH, color: SEV_COLORS['HIGH'] },
-      { label: 'Medium', value: d.sodBySeverity.MEDIUM, color: SEV_COLORS['MEDIUM'] },
-      { label: 'Low', value: d.sodBySeverity.LOW, color: SEV_COLORS['LOW'] },
+      { label: 'Hoch', value: d.sodBySeverity.HIGH, color: SEV_COLORS['HIGH'] },
+      { label: 'Mittel', value: d.sodBySeverity.MEDIUM, color: SEV_COLORS['MEDIUM'] },
+      { label: 'Niedrig', value: d.sodBySeverity.LOW, color: SEV_COLORS['LOW'] },
     ];
   });
 
@@ -305,15 +311,19 @@ export class DashboardComponent {
     const d = this.data();
     if (!d) return [];
     return [
-      { label: 'Critical', value: d.riskBands.CRITICAL, color: BAND_COLORS['CRITICAL'] },
-      { label: 'High', value: d.riskBands.HIGH, color: BAND_COLORS['HIGH'] },
-      { label: 'Medium', value: d.riskBands.MEDIUM, color: BAND_COLORS['MEDIUM'] },
-      { label: 'Low', value: d.riskBands.LOW, color: BAND_COLORS['LOW'] },
+      { label: 'Kritisch', value: d.riskBands.CRITICAL, color: BAND_COLORS['CRITICAL'] },
+      { label: 'Hoch', value: d.riskBands.HIGH, color: BAND_COLORS['HIGH'] },
+      { label: 'Mittel', value: d.riskBands.MEDIUM, color: BAND_COLORS['MEDIUM'] },
+      { label: 'Niedrig', value: d.riskBands.LOW, color: BAND_COLORS['LOW'] },
     ];
   });
 
   protected bandColor(band: string): string {
     return BAND_COLORS[band] ?? BAND_COLORS['LOW'];
+  }
+
+  protected bandLabel(band: string): string {
+    return BAND_LABELS[band] ?? band;
   }
 
   protected riskColor(score: number): string {

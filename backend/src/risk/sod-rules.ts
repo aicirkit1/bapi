@@ -21,7 +21,7 @@ export const SOD_RULES: SodRule[] = [
   {
     id: 'PAYMENT_CREATE_AND_APPROVE',
     description:
-      'A user can both create and approve outgoing payments — a classic fraud risk.',
+      'Ein Benutzer kann ausgehende Zahlungen sowohl erstellen als auch freigeben — ein klassisches Betrugsrisiko.',
     severity: 'HIGH',
     tcodesA: ['F-53', 'F110', 'FB60'],
     tcodesB: ['FBV0', 'FB02', 'F110S'],
@@ -29,7 +29,7 @@ export const SOD_RULES: SodRule[] = [
   {
     id: 'TREASURY_DEAL_AND_SETTLE',
     description:
-      'A user can both create and settle treasury deals — no four-eyes control.',
+      'Ein Benutzer kann Treasury-Geschäfte sowohl anlegen als auch abwickeln — keine Vier-Augen-Kontrolle.',
     severity: 'HIGH',
     tcodesA: ['TBB1', 'FTR_CREATE'],
     tcodesB: ['TBB4', 'FTR_SETTLE'],
@@ -37,7 +37,7 @@ export const SOD_RULES: SodRule[] = [
   {
     id: 'VENDOR_MAINTAIN_AND_PAY',
     description:
-      'A user can maintain vendor master data and create payments — enables paying a self-created vendor.',
+      'Ein Benutzer kann Lieferantenstammdaten pflegen und Zahlungen erstellen — ermöglicht die Zahlung an einen selbst angelegten Lieferanten.',
     severity: 'MEDIUM',
     tcodesA: ['FK01', 'FK02'],
     tcodesB: ['F-53', 'F110', 'FB60'],
@@ -45,7 +45,7 @@ export const SOD_RULES: SodRule[] = [
   {
     id: 'GL_POST_AND_CLOSE',
     description:
-      'A user can both post GL documents and run period-end closing.',
+      'Ein Benutzer kann sowohl Hauptbuchbelege buchen als auch den Periodenabschluss durchführen.',
     severity: 'MEDIUM',
     tcodesA: ['FB50', 'F-02'],
     tcodesB: ['F.16', 'FAGLGVTR'],
@@ -53,7 +53,7 @@ export const SOD_RULES: SodRule[] = [
   {
     id: 'IT_USER_AND_ROLE_ADMIN',
     description:
-      'A user can both create SAP users and maintain authorization roles — can self-grant any access.',
+      'Ein Benutzer kann sowohl SAP-Benutzer anlegen als auch Berechtigungsrollen pflegen — kann sich jede Berechtigung selbst erteilen.',
     severity: 'HIGH',
     tcodesA: ['SU01', 'SU10'],
     tcodesB: ['PFCG', 'SUIM'],
@@ -61,7 +61,7 @@ export const SOD_RULES: SodRule[] = [
   {
     id: 'PROCUREMENT_CREATE_AND_APPROVE',
     description:
-      'A user can both create and approve purchase orders — enables unauthorised spend.',
+      'Ein Benutzer kann Bestellungen sowohl anlegen als auch freigeben — ermöglicht nicht autorisierte Ausgaben.',
     severity: 'HIGH',
     tcodesA: ['ME21N', 'ME51N'],
     tcodesB: ['ME29N', 'ME28'],
@@ -69,7 +69,7 @@ export const SOD_RULES: SodRule[] = [
   {
     id: 'HR_ADMIN_AND_PAYROLL',
     description:
-      'A user can both maintain employee master data and run payroll — can pay a self-created employee.',
+      'Ein Benutzer kann sowohl Personalstammdaten pflegen als auch die Gehaltsabrechnung ausführen — kann einen selbst angelegten Mitarbeiter bezahlen.',
     severity: 'MEDIUM',
     tcodesA: ['PA30', 'PA40'],
     tcodesB: ['PC00', 'PU01'],

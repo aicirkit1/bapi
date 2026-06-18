@@ -33,14 +33,15 @@ const BAND_COLORS: Record<string, string> = {
   template: `
     <div class="page-head row">
       <div>
-        <h1>Access Graph</h1>
+        <h1>Zugriffsgraph</h1>
         <p>
-          Every user (circle, coloured by risk) linked to the roles they hold
-          (diamonds). Hover to trace access; click to drill in.
+          Jeder Benutzer (Kreis, nach Risiko eingefärbt) ist mit den Rollen
+          verbunden, die er besitzt (Rauten). Zeigen Sie mit der Maus darauf,
+          um Zugriffe nachzuverfolgen; klicken Sie, um Details anzuzeigen.
         </p>
       </div>
       <select class="input dept" [(ngModel)]="department" (ngModelChange)="reload()">
-        <option value="">All departments</option>
+        <option value="">Alle Abteilungen</option>
         @for (d of departments(); track d) {
           <option [value]="d">{{ d }}</option>
         }
@@ -99,13 +100,13 @@ const BAND_COLORS: Record<string, string> = {
       </svg>
 
       <div class="legend">
-        <span class="li"><i class="sw" style="background:#d6336c"></i>Critical</span>
-        <span class="li"><i class="sw" style="background:#f1641e"></i>High</span>
-        <span class="li"><i class="sw" style="background:#e8920c"></i>Medium</span>
-        <span class="li"><i class="sw" style="background:#2f9e44"></i>Low risk user</span>
-        <span class="li"><i class="sw diamond"></i>Role</span>
-        <span class="li"><i class="ln dormant"></i>Dormant link</span>
-        <span class="li"><i class="ln cross"></i>Cross-department</span>
+        <span class="li"><i class="sw" style="background:#d6336c"></i>Kritisch</span>
+        <span class="li"><i class="sw" style="background:#f1641e"></i>Hoch</span>
+        <span class="li"><i class="sw" style="background:#e8920c"></i>Mittel</span>
+        <span class="li"><i class="sw" style="background:#2f9e44"></i>Benutzer mit niedrigem Risiko</span>
+        <span class="li"><i class="sw diamond"></i>Rolle</span>
+        <span class="li"><i class="ln dormant"></i>Ruhende Verknüpfung</span>
+        <span class="li"><i class="ln cross"></i>Abteilungsübergreifend</span>
       </div>
     </div>
   `,

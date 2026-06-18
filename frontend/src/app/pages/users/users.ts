@@ -9,8 +9,8 @@ import { User } from '../../core/models';
   imports: [FormsModule, RouterLink],
   template: `
     <div class="page-head">
-      <h1>Users</h1>
-      <p>{{ users().length }} users · click a row to see roles and risks.</p>
+      <h1>Benutzer</h1>
+      <p>{{ users().length }} Benutzer · klicken Sie auf eine Zeile, um Rollen und Risiken anzuzeigen.</p>
     </div>
 
     <div class="card">
@@ -18,17 +18,17 @@ import { User } from '../../core/models';
         class="input search"
         [(ngModel)]="query"
         (ngModelChange)="search()"
-        placeholder="Search by name or ID…"
+        placeholder="Nach Name oder ID suchen…"
       />
 
       @if (users().length === 0) {
-        <div class="empty">No users match your search.</div>
+        <div class="empty">Keine Benutzer entsprechen Ihrer Suche.</div>
       } @else {
         <table>
           <thead>
             <tr>
-              <th>ID</th><th>Name</th><th>Department</th>
-              <th>Roles</th><th>Status</th>
+              <th>ID</th><th>Name</th><th>Abteilung</th>
+              <th>Rollen</th><th>Status</th>
             </tr>
           </thead>
           <tbody>
@@ -40,7 +40,7 @@ import { User } from '../../core/models';
                 <td>{{ u.roles.length }}</td>
                 <td>
                   <span class="tag" [class.tag-primary]="u.status === 'ACTIVE'">
-                    {{ u.status }}
+                    {{ u.status === 'ACTIVE' ? 'Aktiv' : 'Inaktiv' }}
                   </span>
                 </td>
               </tr>
