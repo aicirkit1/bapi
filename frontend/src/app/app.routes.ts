@@ -99,5 +99,31 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/upload/upload').then((m) => m.UploadComponent),
   },
+  {
+    path: 'brk',
+    title: 'BRK · BAPI',
+    loadComponent: () =>
+      import('./pages/brk/brk-shell').then((m) => m.BrkShellComponent),
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'mine' },
+      {
+        path: 'mine',
+        data: { scope: 'mine' },
+        loadComponent: () =>
+          import('./pages/brk/brk-list').then((m) => m.BrkListComponent),
+      },
+      {
+        path: 'all',
+        data: { scope: 'all' },
+        loadComponent: () =>
+          import('./pages/brk/brk-list').then((m) => m.BrkListComponent),
+      },
+      {
+        path: 'edit/:id',
+        loadComponent: () =>
+          import('./pages/brk/brk-detail').then((m) => m.BrkDetailComponent),
+      },
+    ],
+  },
   { path: '**', redirectTo: 'dashboard' },
 ];

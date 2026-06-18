@@ -1,5 +1,12 @@
 import { Component, inject, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import {
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet,
+} from '@angular/router';
+import { filter } from 'rxjs';
 import { ApiService } from './core/api.service';
 
 interface NavItem {
@@ -49,14 +56,29 @@ export class App {
         { path: '/upload', label: 'Data', icon: '⤓' },
       ],
     },
+    {
+      title: 'BSH Mock',
+      items: [
+        { path: '/brk', label: 'Berechtigungskonzept', icon: '▦' },
+      ],
+    },
   ];
 
+  private readonly router = inject(Router);
   protected readonly connector = signal<string>('…');
+  /** Full-bleed (no max-width / padding) for immersive screens like /brk. */
+  protected readonly fullBleed = signal(false);
 
   constructor() {
     this.api.health().subscribe({
       next: (h) => this.connector.set(h.sapConnector),
       error: () => this.connector.set('offline'),
     });
+
+    const evaluate = (url: string) => this.fullBleed.set(url.startsWith('/brk'));
+    evaluate(this.router.url);
+    this.router.events
+      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+      .subscribe((e) => evaluate(e.urlAfterRedirects));
   }
 }

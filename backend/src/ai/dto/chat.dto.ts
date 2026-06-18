@@ -20,7 +20,9 @@ export class ChatMessageDto {
 export class ChatRequestDto {
   @IsString()
   @MinLength(1)
-  @MaxLength(2000)
+  // Large enough to carry a grounded context block (e.g. the BRK module data)
+  // prepended to the user's question.
+  @MaxLength(20000)
   message!: string;
 
   @IsOptional()
