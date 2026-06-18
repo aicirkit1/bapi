@@ -25,7 +25,10 @@ type IconName =
   | 'close'
   | 'chat'
   | 'send'
-  | 'sparkle';
+  | 'sparkle'
+  | 'cart'
+  | 'help'
+  | 'grid';
 
 /** Consistent 24×24 stroke icons (currentColor) — replaces the emoji set. */
 const PATHS: Record<IconName, string> = {
@@ -56,6 +59,9 @@ const PATHS: Record<IconName, string> = {
   chat: '<path d="M4 5h16a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H9l-4 4v-4H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/>',
   send: '<path d="M4 12l16-7-7 16-2.5-6.5z"/>',
   sparkle: '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/>',
+  cart: '<circle cx="9" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/><path d="M3 4h2.2l2.3 11h9.5l1.8-7.5H6.2"/>',
+  help: '<circle cx="12" cy="12" r="9"/><path d="M9.7 9.4a2.4 2.4 0 1 1 3.4 2.2c-.8.4-1.1 1-1.1 1.8"/><circle cx="12" cy="16.6" r="0.5" fill="currentColor"/>',
+  grid: '<rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/>',
 };
 
 @Component({

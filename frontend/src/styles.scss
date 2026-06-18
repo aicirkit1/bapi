@@ -40,6 +40,10 @@ body {
   padding: 0;
   height: 100%;
 }
+body {
+  /* never let a wide inner element (e.g. a data table) scroll the whole page */
+  overflow-x: hidden;
+}
 
 body {
   font-family: var(--font);

@@ -4,8 +4,8 @@ import { BrkChatComponent } from './brk-chat';
 import { BrkIconComponent } from './brk-icon';
 
 /**
- * The BRK app chrome: page title + left sub-navigation (Meine / Alle BRKs).
- * Fixed full-height layout — only the inner table/panel scrolls.
+ * BRK area: page title + left sub-navigation (Meine / Alle BRKs). The gold top
+ * menu bar is provided globally by the app shell.
  */
 @Component({
   selector: 'app-brk-shell',
@@ -58,7 +58,7 @@ import { BrkIconComponent } from './brk-icon';
         font-size: 24px;
         font-weight: 500;
         color: #2f3a4a;
-        margin: 20px 26px 14px;
+        margin: 18px 26px 14px;
         letter-spacing: -0.01em;
       }
       .body {
@@ -111,7 +111,11 @@ import { BrkIconComponent } from './brk-icon';
       }
 
       @media (max-width: 820px) {
+        /* block flow on mobile: a flex column would let the wide table's
+           min-width stretch the whole page; block keeps it at viewport width
+           and the table scrolls inside its own card. */
         .brk {
+          display: block;
           height: auto;
           overflow: visible;
         }
@@ -120,17 +124,19 @@ import { BrkIconComponent } from './brk-icon';
           margin: 14px 16px 10px;
         }
         .body {
-          flex-direction: column;
-          padding: 0 12px 14px;
-          gap: 12px;
+          display: block;
+          min-width: 0;
+          padding: 12px 12px 16px;
           overflow: visible;
         }
         .subnav {
           width: 100%;
           display: flex;
+          margin-bottom: 12px;
         }
         .sub {
           flex: 1;
+          min-width: 0;
           justify-content: center;
           border-bottom: 0;
           border-right: 1px solid #eef0f5;
@@ -139,8 +145,9 @@ import { BrkIconComponent } from './brk-icon';
           border-right: 0;
         }
         .content {
-          min-height: 0;
           display: block;
+          min-width: 0;
+          min-height: 0;
         }
       }
     `,

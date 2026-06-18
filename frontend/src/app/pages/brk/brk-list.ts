@@ -251,12 +251,22 @@ import { BrkIconComponent } from './brk-icon';
         :host {
           height: auto;
           flex: none;
+          display: block;
         }
+        /* natural flow: the card grows, only the wide table scrolls sideways */
         .card {
           flex: none;
+          display: block;
+        }
+        .table-wrap {
+          overflow-x: auto;
         }
         .card-title {
           font-size: 16px;
+        }
+        .pager {
+          flex-wrap: wrap;
+          justify-content: flex-start;
         }
       }
     `,

@@ -607,20 +607,32 @@ table.grid.select tr:hover td {
 
 /* ===== Responsive (phones / small tablets) ===== */
 @media (max-width: 820px) {
+  /* natural document flow — the page scrolls, not an inner pane */
   :host {
     height: auto;
     flex: none;
+    display: block;
   }
   .head {
-    flex-wrap: wrap;
-    gap: 10px;
+    display: block;
   }
+  /* long edit title must wrap instead of widening the page */
   .title {
+    display: block;
+    min-width: 0;
     font-size: 17px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+  .title .pencil {
+    margin-right: 6px;
+    vertical-align: -3px;
+  }
+  .more {
+    margin-top: 10px;
   }
   .layout {
-    flex-direction: column;
-    min-height: 0;
+    display: block;
   }
   /* tab rail becomes a horizontal, scrollable strip above the panel */
   .rail {
@@ -628,15 +640,20 @@ table.grid.select tr:hover td {
     max-height: none;
     flex-direction: row;
     overflow-x: auto;
-    align-self: stretch;
+    margin-bottom: 14px;
   }
   .tab {
     white-space: nowrap;
     padding: 11px 13px;
   }
+  /* panel grows with content; wide tables scroll sideways inside it */
   .panel {
+    flex: none;
     overflow-x: auto;
     padding: 20px 16px;
+  }
+  .panel .grid {
+    min-width: 520px;
   }
   /* drawers go full-width */
   .drawer,

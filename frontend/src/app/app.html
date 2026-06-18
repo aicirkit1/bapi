@@ -1,44 +1,53 @@
-<div class="shell" [class.menu-open]="menuOpen()">
-  <!-- mobile top bar (hidden on desktop) -->
-  <header class="mobile-topbar">
-    <button class="hamburger" (click)="menuOpen.set(!menuOpen())" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-    <div class="m-brand"><span class="brand-mark sm">B</span> BAPI</div>
-  </header>
-
-  <div class="nav-backdrop" (click)="menuOpen.set(false)"></div>
-
-  <aside class="sidebar" [class.open]="menuOpen()">
-    <div class="brand">
-      <div class="brand-mark">B</div>
-      <div class="brand-text">
-        <strong>BAPI</strong>
-        <span>SAP-Zugriffsintelligenz</span>
+<div class="app">
+  <header class="appbar">
+    <!-- yellow brand / utility bar -->
+    <div class="brandbar">
+      <span class="wordmark">BAPI</span>
+      <div class="utils">
+        <button class="util" title="Anwendungen">
+          <brk-icon name="grid" [size]="18" />
+        </button>
+        <button class="util" title="Bestellungen">
+          <brk-icon name="cart" [size]="19" />
+          <span class="badge">2</span>
+        </button>
+        <span class="user">
+          <span class="avatar"><brk-icon name="user" [size]="15" /></span>
+          {{ currentUser }}
+        </span>
+        <button class="util" title="Hilfe">
+          <brk-icon name="help" [size]="19" />
+        </button>
       </div>
     </div>
 
-    <nav>
-      @for (group of groups; track group.title) {
-        <div class="nav-group">
-          <span class="nav-group-title">{{ group.title }}</span>
-          @for (item of group.items; track item.path) {
-            <a [routerLink]="item.path" routerLinkActive="active" class="nav-item">
-              <span class="nav-icon">{{ item.icon }}</span>
-              {{ item.label }}
-            </a>
+    <!-- white menu bar -->
+    <nav class="menubar">
+      @for (m of menus; track m.label; let i = $index) {
+        <div class="menu-wrap">
+          <button
+            class="menu-btn"
+            [class.active]="activeIndex() === i"
+            [class.open]="open() === i"
+            (click)="toggle(i, $event)"
+          >
+            {{ m.label }} <span class="caret"></span>
+          </button>
+          @if (open() === i) {
+            <div class="dropdown">
+              @for (item of m.items; track item.label) {
+                @if (item.header) {
+                  <div class="dd-header">{{ item.label }}</div>
+                } @else {
+                  <button class="dd-item" (click)="select(item)">{{ item.label }}</button>
+                }
+              }
+            </div>
           }
         </div>
       }
     </nav>
-
-    <div class="sidebar-foot">
-      <div class="conn">
-        <span class="dot"></span>
-        SAP: {{ connector() }}
-      </div>
-    </div>
-  </aside>
+  </header>
 
   <main class="content" [class.full-bleed]="fullBleed()">
     <router-outlet />
