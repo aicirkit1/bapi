@@ -224,6 +224,43 @@ app-ai-insight {
   margin-bottom: 16px;
 }
 
+/* ===== Global responsive (phones / small tablets) ===== */
+@media (max-width: 720px) {
+  h1 {
+    font-size: 19px;
+  }
+  h2 {
+    font-size: 16px;
+  }
+  .card {
+    padding: 16px;
+    /* let wide data tables scroll inside the card instead of the whole page */
+    overflow-x: auto;
+  }
+  table {
+    font-size: 13px;
+  }
+  th,
+  td {
+    padding: 10px;
+    white-space: nowrap;
+  }
+  /* headers that put a title next to actions: stack them */
+  .page-head.row,
+  .row {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 560px) {
+  /* dense KPI / summary grids drop to two columns on phones */
+  .kpis,
+  .summary {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
 /* ---- print (audit report → PDF) ---------------------------------------- */
 @media print {
   .sidebar,

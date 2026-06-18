@@ -246,6 +246,19 @@ import { BrkIconComponent } from './brk-icon';
       .btn-add:hover {
         background: #1976d2;
       }
+
+      @media (max-width: 820px) {
+        :host {
+          height: auto;
+          flex: none;
+        }
+        .card {
+          flex: none;
+        }
+        .card-title {
+          font-size: 16px;
+        }
+      }
     `,
   ],
 })

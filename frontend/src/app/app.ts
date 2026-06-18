@@ -68,6 +68,8 @@ export class App {
   protected readonly connector = signal<string>('…');
   /** Full-bleed (no max-width / padding) for immersive screens like /brk. */
   protected readonly fullBleed = signal(false);
+  /** Mobile off-canvas nav open state. */
+  protected readonly menuOpen = signal(false);
 
   constructor() {
     this.api.health().subscribe({
@@ -79,6 +81,9 @@ export class App {
     evaluate(this.router.url);
     this.router.events
       .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
-      .subscribe((e) => evaluate(e.urlAfterRedirects));
+      .subscribe((e) => {
+        evaluate(e.urlAfterRedirects);
+        this.menuOpen.set(false); // close the mobile drawer on navigation
+      });
   }
 }

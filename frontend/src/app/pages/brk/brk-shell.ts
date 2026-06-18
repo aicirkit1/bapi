@@ -109,6 +109,40 @@ import { BrkIconComponent } from './brk-icon';
         min-height: 0;
         display: flex;
       }
+
+      @media (max-width: 820px) {
+        .brk {
+          height: auto;
+          overflow: visible;
+        }
+        .page-title {
+          font-size: 20px;
+          margin: 14px 16px 10px;
+        }
+        .body {
+          flex-direction: column;
+          padding: 0 12px 14px;
+          gap: 12px;
+          overflow: visible;
+        }
+        .subnav {
+          width: 100%;
+          display: flex;
+        }
+        .sub {
+          flex: 1;
+          justify-content: center;
+          border-bottom: 0;
+          border-right: 1px solid #eef0f5;
+        }
+        .sub:last-child {
+          border-right: 0;
+        }
+        .content {
+          min-height: 0;
+          display: block;
+        }
+      }
     `,
   ],
 })

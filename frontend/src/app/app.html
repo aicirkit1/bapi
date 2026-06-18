@@ -1,5 +1,15 @@
-<div class="shell">
-  <aside class="sidebar">
+<div class="shell" [class.menu-open]="menuOpen()">
+  <!-- mobile top bar (hidden on desktop) -->
+  <header class="mobile-topbar">
+    <button class="hamburger" (click)="menuOpen.set(!menuOpen())" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="m-brand"><span class="brand-mark sm">B</span> BAPI</div>
+  </header>
+
+  <div class="nav-backdrop" (click)="menuOpen.set(false)"></div>
+
+  <aside class="sidebar" [class.open]="menuOpen()">
     <div class="brand">
       <div class="brand-mark">B</div>
       <div class="brand-text">

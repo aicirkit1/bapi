@@ -3,6 +3,14 @@
   min-height: 100vh;
 }
 
+/* mobile top bar + backdrop — hidden on desktop */
+.mobile-topbar {
+  display: none;
+}
+.nav-backdrop {
+  display: none;
+}
+
 .sidebar {
   width: 248px;
   flex-shrink: 0;
@@ -127,26 +135,93 @@ nav {
   overflow: hidden;
 }
 
-@media (max-width: 720px) {
+/* ===== Mobile / tablet: off-canvas sidebar ===== */
+@media (max-width: 900px) {
   .shell {
     flex-direction: column;
   }
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: static;
-    flex-direction: row;
-    flex-wrap: wrap;
+
+  .mobile-topbar {
+    display: flex;
     align-items: center;
+    gap: 14px;
+    position: sticky;
+    top: 0;
+    z-index: 45;
+    height: 54px;
+    padding: 0 16px;
+    background: #16162e;
+    color: #fff;
   }
-  nav {
-    flex-direction: row;
-    flex-wrap: wrap;
+  .m-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
   }
-  .sidebar-foot {
-    display: none;
+  .brand-mark.sm {
+    width: 28px;
+    height: 28px;
+    font-size: 15px;
+    border-radius: 8px;
   }
+  .hamburger {
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 8px;
+  }
+  .hamburger span {
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 268px;
+    max-width: 82vw;
+    height: 100vh;
+    z-index: 60;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    box-shadow: 6px 0 28px rgba(0, 0, 0, 0.35);
+  }
+  .shell.menu-open .sidebar {
+    transform: translateX(0);
+  }
+  .shell.menu-open .nav-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    background: rgba(10, 12, 24, 0.5);
+  }
+
   .content {
-    padding: 20px;
+    padding: 20px 16px;
+    max-width: none;
+  }
+  /* full-bleed screens (e.g. /brk) flow naturally on mobile and page-scroll */
+  .content.full-bleed {
+    height: auto;
+    min-height: calc(100vh - 54px);
+    overflow: visible;
+    padding: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 16px 12px;
   }
 }
